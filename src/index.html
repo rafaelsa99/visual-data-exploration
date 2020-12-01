@@ -13,8 +13,8 @@
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
 <script type="module">
-    import Plot from './plot.js';
-    var plot = new Plot('#my_dataviz');
+    import LinePlot from './linePlot.js';
+    var plot = new LinePlot('#my_dataviz');
     //console.debug(v);
     //let plot = new Plot()
     plot.create_plot("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_connectedscatter.csv",["valueA", "valueB", "valueC"],['time'])

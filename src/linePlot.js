@@ -1,4 +1,4 @@
-class Plot{
+class LinePlot{
     constructor(div_id){
         // set the dimensions and margins of the graph
         this.margin = {top: 10, right: 100, bottom: 30, left: 30};
@@ -132,5 +132,5 @@ class Plot{
     }
 }
 
-export default Plot;
+export default LinePlot;
 
