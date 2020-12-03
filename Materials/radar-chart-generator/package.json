@@ -1,0 +1,14 @@
+{
+  "name": "@bradysheridan/radar-chart-generator",
+  "main": "a30e3ad35808acfe@898.js",
+  "version": "898.0.0",
+  "homepage": "https://observablehq.com/@bradysheridan/radar-chart-generator",
+  "author": {
+    "name": "Brady Sheridan",
+    "url": "https://observablehq.com/@bradysheridan"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4"
+  }
+}

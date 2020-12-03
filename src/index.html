@@ -1,13 +1,22 @@
 <!-- Code from d3-graph-gallery.com -->
 <!DOCTYPE html>
 <meta charset="utf-8">
+<!-- Google fonts -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
 <script src="https://d3js.org/d3-fetch.v1.min.js"> </script> 
 <script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
 <!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
+<div id="lineplot"></div>
+
+<div id="grouped_bar_plot"></div>
+
+<div id="radar_chart"></div>
 
 
 <!-- Color Scale -->
@@ -17,8 +26,31 @@
 
     import Data from './Data.js';
     import LinePlot from './linePlot.js';
-    var plot = new LinePlot('#my_dataviz');
+    var lineplot = new LinePlot('#lineplot');
     var data = new Data();
-    data.notas_ultimos_colocados('./files_list.csv', plot.create_plot);
+    data.notas_ultimos_colocados('./files_list.csv', lineplot.create_plot);
+
+    import GroupedBarPlot from './groupedBarPlot.js';
+    import RadarChart from './radarChart.js';
+    var gbarplot = new GroupedBarPlot('#grouped_bar_plot');
+    var radarChart = new RadarChart('#radar_chart');
+    //console.debug(v);
+    //let plot = new Plot()
+
+    /*let test = [{time: "1", valueA: "2", valueB: "5", valueC: "13"},
+                {time: "2", valueA: "3", valueB: "4", valueC: "14"},
+                {time: "3", valueA: "1", valueB: "4", valueC: "16"},
+                {time: "4", valueA: "7", valueB: "4", valueC: "12"},
+                {time: "5", valueA: "8", valueB: "8", valueC: "7"},
+                {time: "6", valueA: "8", valueB: "13", valueC: "9"},
+                {time: "7", valueA: "5", valueB: "15", valueC: "3"},
+                {time: "8", valueA: "4", valueB: "17", valueC: "2"},
+                {time: "9", valueA: "9", valueB: "18", valueC: "1"},
+                {time: "10", valueA: "11", valueB: "13", valueC: "1"}]
+
+
+    lineplot.create_plot(test,["valueA", "valueB", "valueC"],['time'])*/
+    gbarplot.create_plot("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv",['group'])
+    //radarChart.create_plot(data, radarChartOptions)
 
 </script>
