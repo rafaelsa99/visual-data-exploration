@@ -148,8 +148,11 @@ class LinePlot{
         var dataReady = columns.map( function(grpName) { // .map allows to do something for each element of the list
         return {
             name: grpName,
-            values: data.map(function(d) {
-            return {h_axis: +d[label_x_axis], value: +d[grpName]};
+            values: data.filter(function(d) {
+                if(!isNaN(d[grpName]))
+                    return {h_axis: +d[label_x_axis], value: + d[grpName]};
+            }).map(function(d) {
+                return {h_axis: +d[label_x_axis], value: + d[grpName]};
             })
         };
         });
@@ -163,7 +166,7 @@ class LinePlot{
 
         // Add X axis --> it is a date format
         var x = d3.scaleLinear()
-        .domain([0,10])
+        .domain([2007, 2016])
         .range([ 0, width ]);
         svg.append("g")
         .attr("transform", "translate(0," + height + ")")
@@ -171,7 +174,7 @@ class LinePlot{
 
         // Add Y axis
         var y = d3.scaleLinear()
-        .domain( [0,20])
+        .domain( [100, 200])
         .range([ height, 0 ]);
         svg.append("g")
         .call(d3.axisLeft(y));
