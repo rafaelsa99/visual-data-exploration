@@ -32,7 +32,17 @@
     import RadarChart from './radarChart.js';
     var gbarplot = new GroupedBarPlot('#grouped_bar_plot');
     var radarChart = new RadarChart('#radar_chart');
-    gbarplot.create_plot("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv",['group'])
+
+    let test = [
+    {group: "banana", Nitrogen: "12", normal: "1", stress: "13"},
+    {group: "poacee", Nitrogen: "6", normal: "6", stress: "33"},
+    {group: "sorgho", Nitrogen: "11", normal: "28", stress: "12"},
+    {group: "triticum", Nitrogen: "19", normal: "6", stress: "1"}
+    ]
+    test.columns =  ["group", "Nitrogen", "normal", "stress"]
+
+    //gbarplot.create_plot_csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv",['group'])
+    gbarplot.create_plot(test,['group'])
     //radarChart.create_plot(data, radarChartOptions)
 
 </script>

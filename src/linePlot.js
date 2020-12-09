@@ -1,9 +1,9 @@
 class LinePlot{
     constructor(div_id){
         // set the dimensions and margins of the graph
-        this.margin = {top: 10, right: 100, bottom: 30, left: 30};
-        this.width = 460 - this.margin.left - this.margin.right;
-        this.height = 400 - this.margin.top - this.margin.bottom;
+        this.margin = {top: 10, right: 100, bottom: 30, left: 50};
+        this.width = 800 - this.margin.left - this.margin.right;
+        this.height = 800 - this.margin.top - this.margin.bottom;
         
         // append the svg object to the body of the page
         this.svg = d3.select(div_id)
@@ -166,8 +166,10 @@ class LinePlot{
 
         // Add X axis --> it is a date format
         var x = d3.scaleLinear()
-        .domain([2007, 2016])
-        .range([ 0, width ]);
+        //.domain(data.map(d => {return +d[label_x_axis]}))
+        .domain(d3.extent(data, function(d) { return +d[label_x_axis]; })).nice()
+        //.range([ 0, (width / (dataReady.length+1))]);
+        .range([ 0, width]);
         svg.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x));
@@ -222,7 +224,7 @@ class LinePlot{
             .attr("class", function(d){ return d.name })
             .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; }) // keep only the last value of each time series
             .attr("transform", function(d) { return "translate(" + x(d.value.h_axis) + "," + y(d.value.value) + ")"; }) // Put the text at the position of the last point
-            .attr("x", 12) // shift the text a bit more right
+            .attr("x", 15) // shift the text a bit more right
             .text(function(d) { return d.name; })
             .style("fill", function(d){ return myColor(d.name) })
             .style("font-size", 15)
@@ -234,7 +236,7 @@ class LinePlot{
         .enter()
             .append('g')
             .append("text")
-            .attr('x', function(d,i){ return 30 + i*60})
+            .attr('x', function(d,i){ return 30 + i*90})
             .attr('y', 30)
             .text(function(d) { return d.name; })
             .style("fill", function(d){ return myColor(d.name) })
