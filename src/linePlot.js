@@ -131,7 +131,7 @@ class LinePlot{
         })
     }
 
-    create_plot = (data, columns, label_x_axis) => {
+    create_plot = (data, columns, label_x_axis, y_axis_domain) => {
 
         var _this = this;
 
@@ -176,7 +176,7 @@ class LinePlot{
 
         // Add Y axis
         var y = d3.scaleLinear()
-        .domain( [0, 100])
+        .domain(y_axis_domain)
         .range([ height, 0 ]);
         svg.append("g")
         .call(d3.axisLeft(y));
