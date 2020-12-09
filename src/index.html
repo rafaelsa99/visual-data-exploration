@@ -33,6 +33,49 @@
     //console.debug(v);
     //let plot = new Plot()
 
+    //Radar Chart Data
+    ////////////////////////////////////////////////////////////// 
+    ////////////////////////// Data ////////////////////////////// 
+    ////////////////////////////////////////////////////////////// 
+
+    var data = [
+				{ name: 'Allocated budget',
+					axes: [
+						{axis: 'Sales', value: 42},
+						{axis: 'Marketing', value: 20},
+						{axis: 'Development', value: 60},
+						{axis: 'Customer Support', value: 26},
+						{axis: 'Information Technology', value: 35},
+						{axis: 'Administration', value: 20}
+					],
+         color: '#26AF32'
+				},
+				{ name: 'Actual Spending',
+					axes: [
+						{axis: 'Sales', value: 50},
+						{axis: 'Marketing', value: 45},
+						{axis: 'Development', value: 20},
+						{axis: 'Customer Support', value: 20},
+						{axis: 'Information Technology', value: 25},
+						{axis: 'Administration', value: 23}
+					],
+         color: '#762712'
+				}
+			];
+    ////////////////////////////////////////////////////////////// 
+    //////////////////// Draw the Chart ////////////////////////// 
+    ////////////////////////////////////////////////////////////// 
+
+    var color = d3.scaleOrdinal()
+        .range(["#EDC951","#CC333F","#00A0B0"]);
+        
+    var radarChartOptions = {
+        maxValue: 0.5,
+        levels: 5,
+        roundStrokes: true,
+        color: color
+    };
+
     let test = [{time: "1", valueA: "2", valueB: "5", valueC: "13"},
                 {time: "2", valueA: "3", valueB: "4", valueC: "14"},
                 {time: "3", valueA: "1", valueB: "4", valueC: "16"},
@@ -44,6 +87,7 @@
                 {time: "9", valueA: "9", valueB: "18", valueC: "1"},
                 {time: "10", valueA: "11", valueB: "13", valueC: "1"}]
 
+    console.log(test)
 
     lineplot.create_plot(test,["valueA", "valueB", "valueC"],['time'])
     gbarplot.create_plot("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv",['group'])
