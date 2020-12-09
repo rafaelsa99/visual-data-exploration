@@ -18,6 +18,8 @@
 
 <div id="radar_chart"></div>
 
+<div id="cord_diagram"></div>
+
 
 <!-- Color Scale -->
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
@@ -51,8 +53,42 @@
     ]
     test.columns =  ["group", "Nitrogen", "normal", "stress"]
 
+    var dataaa = [
+    { name: 'Allocated_budget',
+        axes: [
+            {axis: 'Sales', value: 42},
+            {axis: 'Marketing', value: 20},
+            {axis: 'Development', value: 60},
+            {axis: 'Customer Support', value: 26},
+            {axis: 'Information Technology', value: 35},
+            {axis: 'Administration', value: 20}
+        ]
+    },
+    { name: 'Actual_Spending',
+        axes: [
+            {axis: 'Sales', value: 50},
+            {axis: 'Marketing', value: 45},
+            {axis: 'Development', value: 20},
+            {axis: 'Customer Support', value: 20},
+            {axis: 'Information Technology', value: 25},
+            {axis: 'Administration', value: 23}
+        ]
+    }
+    ];
+				
+    var radarChartOptions = {
+        w: 490,
+        h: 550,
+        levels: 5,
+        roundStrokes: true,
+        color: d3.scaleOrdinal().range(["#AFC52F", "#ff6600"]),
+        format: '.0f',
+        legend: { title: 'Notas', translateX: -35, translateY: -300 },
+        unit: ''
+    };
+
     //gbarplot.create_plot_csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv",['group'])
     //gbarplot.create_plot(test,["group"])
-    //radarChart.create_plot(data, radarChartOptions)
+    radarChart.create_plot(dataaa, radarChartOptions)
 
 </script>
