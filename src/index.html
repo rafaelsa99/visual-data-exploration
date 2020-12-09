@@ -10,7 +10,9 @@
 <script src="https://d3js.org/d3.v4.min.js"></script>
 
 <!-- Create a div where the graph will take place -->
-<div id="lineplot"></div>
+<div id="lineplotNotas"></div>
+
+<div id="lineplotOpcoes"></div>
 
 <div id="grouped_bar_plot"></div>
 
@@ -24,14 +26,23 @@
 
     import Data from './Data.js';
     import LinePlot from './linePlot.js';
-    var lineplot = new LinePlot('#lineplot');
     var data = new Data();
-    data.notas_ultimos_colocados('./files_list.csv', lineplot.create_plot);
+
+    var lineplotNotas = new LinePlot('#lineplotNotas');
+    data.notas_ultimos_colocados('./files_list.csv', lineplotNotas.create_plot);
+
+    var lineplotOpcoes = new LinePlot('#lineplotOpcoes');
+    data.percentagem_posicao_curso('./files_list.csv', 'UA-EET',  lineplotOpcoes.create_plot);
 
     import GroupedBarPlot from './groupedBarPlot.js';
     import RadarChart from './radarChart.js';
     var gbarplot = new GroupedBarPlot('#grouped_bar_plot');
     var radarChart = new RadarChart('#radar_chart');
+
+    data.notas_colocados('./files_list.csv', 'UA-EET',  null);
+    data.notas_colocados('./files_list.csv', 'UA-EET',  null);
+    data.alternativas_candidatos('./files_list.csv', 2016,  null)
+    data.preferencias_opcoes('./files_list.csv', 2016,  null)
 
     let test = [
     {group: "banana", Nitrogen: "12", normal: "1", stress: "13"},
