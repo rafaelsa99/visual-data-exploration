@@ -585,6 +585,29 @@ class Data{
         })
     }
 
+    get_range_years(files_list, sliderFunction, course = "all"){
+        var min_year, max_year, isFirst = true, count = 0;
+        d3.csv(files_list, function(data){
+            data.forEach(element => {
+                if(course == "all" || element.course == course){
+                    if(isFirst){
+                        min_year = element.year;
+                        max_year = element.year;
+                        isFirst = false;
+                    } else{
+                        if(element.year > max_year){
+                            max_year = element.year;
+                        }
+                        if(element.year < min_year){
+                            min_year = element.year;
+                        }
+                    }
+                }
+            })
+            //sliderFunction(min_year, max_year);
+        });
+    }
+
 }
 
 export default Data;
