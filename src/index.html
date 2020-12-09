@@ -41,8 +41,47 @@
     ]
     test.columns =  ["group", "Nitrogen", "normal", "stress"]
 
-    //gbarplot.create_plot_csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv",['group'])
+    var margin = {top: 100, right: 100, bottom: 100, left: 100},
+				width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+				height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+
+    var dataaa = [
+    { name: 'Allocated_budget',
+        axes: [
+            {axis: 'Sales', value: 42},
+            {axis: 'Marketing', value: 20},
+            {axis: 'Development', value: 60},
+            {axis: 'Customer Support', value: 26},
+            {axis: 'Information Technology', value: 35},
+            {axis: 'Administration', value: 20}
+        ]
+    },
+    { name: 'Actual_Spending',
+        axes: [
+            {axis: 'Sales', value: 50},
+            {axis: 'Marketing', value: 45},
+            {axis: 'Development', value: 20},
+            {axis: 'Customer Support', value: 20},
+            {axis: 'Information Technology', value: 25},
+            {axis: 'Administration', value: 23}
+        ]
+    }
+    ];
+				
+    var radarChartOptions = {
+        w: 490,
+        h: 550,
+        margin: margin,
+        levels: 5,
+        roundStrokes: true,
+        color: d3.scaleOrdinal().range(["#AFC52F", "#ff6600"]),
+        format: '.0f',
+        legend: { title: 'Notas', translateX: -35, translateY: -300 },
+        unit: ''
+    };
+
+    gbarplot.create_plot_csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv",['group'])
     gbarplot.create_plot(test,['group'])
-    //radarChart.create_plot(data, radarChartOptions)
+    radarChart.create_plot(dataaa, radarChartOptions)
 
 </script>
