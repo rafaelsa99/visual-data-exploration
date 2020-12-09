@@ -31,10 +31,10 @@
     var data = new Data();
 
     var lineplotNotas = new LinePlot('#lineplotNotas');
-    data.notas_ultimos_colocados('./files_list.csv', lineplotNotas.create_plot);
+    data.notas_ultimos_colocados('./files_list.csv', 2007, 2016, lineplotNotas.create_plot);
 
     var lineplotOpcoes = new LinePlot('#lineplotOpcoes');
-    data.percentagem_posicao_curso('./files_list.csv', 'UA-EET',  lineplotOpcoes.create_plot);
+    data.percentagem_posicao_curso('./files_list.csv', 'UA-EET', 2007, 2016, lineplotOpcoes.create_plot);
 
     import GroupedBarPlot from './groupedBarPlot.js';
     import RadarChart from './radarChart.js';

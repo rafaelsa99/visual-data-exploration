@@ -1,30 +1,28 @@
 class Data{
 
-    notas_ultimos_colocados(files_list, plot){
+    notas_ultimos_colocados(files_list, min_year, max_year, plot){
         var grades_courses = new Map()
         let years = new Map()
         let listCourses = new Set()
         let count = 1;
-    
+        let totalFiles = 0;
 
         const append_data = (obj, min_grade, pos) => {
-            d3.csv(files_list, function(courses){
-                append_course(obj.course)
-                var i;
-                if(years.has(obj.year)){
-                    i = years.get(obj.year);
-                } else {
-                    i = grades_courses.size
-                    var year = new Map()
-                    year.set("year",obj.year)
-                    grades_courses.set(i, year);
-                    append_years(obj.year, i)
-                }
-                grades_courses.get(i).set(obj.course, String(min_grade));
-                if (pos == courses.length) {
-                    plot(get_JSON_Format(grades_courses), Array.from(listCourses),['year'],[100,200])
-                }  
-            })
+            append_course(obj.course)
+            var i;
+            if(years.has(obj.year)){
+                i = years.get(obj.year);
+            } else {
+                i = grades_courses.size
+                var year = new Map()
+                year.set("year",obj.year)
+                grades_courses.set(i, year);
+                append_years(obj.year, i)
+            }
+            grades_courses.get(i).set(obj.course, String(min_grade));
+            if (pos == totalFiles) {
+                plot(get_JSON_Format(grades_courses), Array.from(listCourses),['year'],[100,200])
+            }  
         }
 
         const get_JSON_Format = (map) => {
@@ -58,26 +56,40 @@ class Data{
         const incCount = () =>{
             count += 1;
         }
+
+        const incTotalFiles = () =>{
+            totalFiles += 1;
+        }
+
         d3.csv(files_list, function(data){
             data.forEach(element => {
-                d3.text(element.filename, function(error, raw){
-                    var dsv = d3.dsvFormat(';')
-                    var data_file = dsv.parse(raw)
-                    var min_grade = 200
-                    data_file.forEach(data => {
-                        var grade = parseFloat(data.NotaCandidaturaCurso.replace(",", "."))
-                        if(data.ColocCursoCodigo == element.cod_course && data.ColocInstituicaoCodigo == element.cod_institution && grade < min_grade){
-                            min_grade = grade; 
-                        }
-                        });
-                    append_data(element, min_grade, count)
-                    incCount()
-                })
+                if(element.year >= min_year && element.year <= max_year){
+                    incTotalFiles()
+                }
+            })
+        });
+        d3.csv(files_list, function(data){
+            data.forEach(element => {
+                if(element.year >= min_year && element.year <= max_year){
+                    d3.text(element.filename, function(error, raw){
+                        var dsv = d3.dsvFormat(';')
+                        var data_file = dsv.parse(raw)
+                        var min_grade = 200
+                        data_file.forEach(data => {
+                            var grade = parseFloat(data.NotaCandidaturaCurso.replace(",", "."))
+                            if(data.ColocCursoCodigo == element.cod_course && data.ColocInstituicaoCodigo == element.cod_institution && grade < min_grade){
+                                min_grade = grade; 
+                            }
+                            });
+                        append_data(element, min_grade, count)
+                        incCount()
+                    })
+                }
             });
         })
     }
 
-    percentagem_posicao_curso(files_list, course, plot){
+    percentagem_posicao_curso(files_list, course, min_year, max_year, plot){
         
         var countOptions = new Map()
         let totalFiles = 0;
@@ -133,14 +145,14 @@ class Data{
 
         d3.csv(files_list, function(data){
             data.forEach(element => {
-                if(element.course == course){
+                if(element.course == course && element.year >= min_year && element.year <= max_year){
                     incTotalFiles()
                 }
             })
         });
         d3.csv(files_list, function(data){
             data.forEach(element => {
-                if(element.course == course){
+                if(element.course == course && element.year >= min_year && element.year <= max_year){
                     d3.text(element.filename, function(error, raw){
                         var dsv = d3.dsvFormat(';')
                         var data_file = dsv.parse(raw)
