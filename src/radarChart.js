@@ -332,9 +332,6 @@ class RadarChart{
 
         var _this = this;
 
-        var margin = _this.margin;
-        var width = _this.width;
-        var height = _this.height;
         var svg = _this.svg;
 
         const max = Math.max;

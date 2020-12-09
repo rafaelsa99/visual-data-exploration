@@ -418,7 +418,7 @@ class Data{
         })
     }
 
-    preferencias_opcoes(files_list, year, plot){
+    preferencias_opcoes(files_list, year, plot, plotOptions){
         var optionsCourse = new Map()
         let listCourses = new Map()
         let count = 1;
@@ -433,22 +433,49 @@ class Data{
                 optionsCourse.get(i).set(key, value);
             }
             if (pos == totalFiles) {
-                //console.log(get_JSON_Format(optionsCourse))
-                //plot(get_JSON_Format(grades_courses), Array.from(listCourses),['year'])
+                console.log(get_JSON_Format(optionsCourse))
+                plot.create_plot(get_JSON_Format(optionsCourse), plotOptions)
             }  
         }
 
         const get_JSON_Format = (map) => {
             var jsonArray = []
             for(var j of map.values()){
-                jsonArray.push(Object.fromEntries(j));
+                var axes = []
+                var obj = new Object()
+                for(var k of j){
+                    if(k[0] == "course"){
+                        obj["name"] = k[1];
+                    } else {
+                        var axesObj = new Object()
+                        axesObj["axis"] = k[0]
+                        axesObj["value"] = k[1];
+                        axes.push(axesObj)
+                    }
+                }
+                obj["axes"] = axes;
+                jsonArray.push(obj);
+            }
+            for(var j of jsonArray){
+                j.axes.sort(
+                    function (a, b) {
+                        if (a.axis > b.axis) {
+                            return 1; 
+                        }
+                        if (a.axis < b.axis) { 
+                            return -1; 
+                        } 
+                        // a must be equal to b 
+                        return 0; 
+                    }
+                )
             }
             jsonArray.sort(
                 function (a, b) {
-                    if (a.year > b.year) {
+                    if (a.name > b.name) {
                         return 1; 
                     }
-                    if (a.year < b.year) { 
+                    if (a.name < b.name) { 
                         return -1; 
                     } 
                     // a must be equal to b 

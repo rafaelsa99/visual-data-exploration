@@ -43,7 +43,6 @@
 
     data.notas_colocados('./files_list.csv', 'UA-EET', gbarplot.create_plot);
     data.alternativas_candidatos('./files_list.csv', 2016,  null)
-    data.preferencias_opcoes('./files_list.csv', 2016,  null)
 
     let test = [
     {group: "banana", Nitrogen: "12", normal: "1", stress: "13"},
@@ -81,14 +80,15 @@
         h: 550,
         levels: 5,
         roundStrokes: true,
-        color: d3.scaleOrdinal().range(["#AFC52F", "#ff6600"]),
+        color: d3.scaleOrdinal().range(["#AFC52F", "#ff6600", "#3258a8", "#db2121", "#fffb26", "#5c350b" , "#c10ec4", "#0ec4af"]),
         format: '.0f',
-        legend: { title: 'Notas', translateX: -35, translateY: -300 },
+        legend: { title: 'Cursos', translateX: -35, translateY: -300 },
         unit: ''
     };
 
     //gbarplot.create_plot_csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv",['group'])
     //gbarplot.create_plot(test,["group"])
-    radarChart.create_plot(dataaa, radarChartOptions)
+    data.preferencias_opcoes('./files_list.csv', 2009,  radarChart, radarChartOptions)
+    //radarChart.create_plot(dataaa, radarChartOptions)
 
 </script>
