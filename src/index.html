@@ -41,7 +41,7 @@
     var gbarplot = new GroupedBarPlot('#grouped_bar_plot');
     var radarChart = new RadarChart('#radar_chart');
 
-    data.notas_colocados('./files_list.csv', 'UA-EET', gbarplot.create_plot);
+    data.notas_colocados('./files_list.csv', 'UA-EET', 2007, 2016, gbarplot.create_plot);
     data.alternativas_candidatos('./files_list.csv', 2016,  null)
 
     let test = [

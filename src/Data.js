@@ -168,7 +168,7 @@ class Data{
         })
     }
 
-    notas_colocados(files_list, course, plot){
+    notas_colocados(files_list, course, min_year, max_year, plot){
 
         var grades = new Map()
         var grade = new Map()
@@ -224,20 +224,24 @@ class Data{
                     return 0; 
                 }
             )
-            jsonArray.columns =  ["grade", "Ano2007", "Ano2008", "Ano2009", "Ano2010", "Ano2011", "Ano2012", "Ano2013", "Ano2014", "Ano2015", "Ano2016"]
+            var columns = ["grade"];
+            for (var year = min_year; year <= max_year; year++) {
+                columns.push("Ano" + year)
+            }
+            jsonArray.columns =  columns;
             return jsonArray;
         }
 
         d3.csv(files_list, function(data){
             data.forEach(element => {
-                if(element.course == course){
+                if(element.course == course && element.year >= min_year && element.year <= max_year){
                     incTotalFiles()
                 }
             })
         });
         d3.csv(files_list, function(data){
             data.forEach(element => {
-                if(element.course == course){
+                if(element.course == course && element.year >= min_year && element.year <= max_year){
                     d3.text(element.filename, function(error, raw){
                         var dsv = d3.dsvFormat(';')
                         var data_file = dsv.parse(raw)
