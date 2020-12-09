@@ -171,25 +171,36 @@ class Data{
     notas_colocados(files_list, course, plot){
 
         var grades = new Map()
+        var grade = new Map()
         let totalFiles = 0;
         let count = 1;
 
         const append_data = (obj, count_grades, pos) => {
-            var i = grades.size
-            var year = new Map()
-            year.set("year",obj.year)
-            grades.set(i, year);
             for (const [key, value] of count_grades.entries()) {
-                grades.get(i).set(key, value);
+                var i;
+                if(grade.has(key)){
+                    i = grade.get(key);
+                } else {
+                    i = grades.size
+                    var nota = new Map()
+                    nota.set("grade",String(key))
+                    grades.set(i, nota);
+                    append_grade(key, i)
+                }
+                grades.get(i).set(String("Ano" + obj.year), String(value));
             }
             if (pos == totalFiles) {
-                //plot(get_JSON_Format(countOptions), ['Opção1', 'Opção2', 'Opção3', 'Opção4', 'Opção5', 'Opção6'],['year'])
-                //console.log(get_JSON_Format(grades))
+                console.log(get_JSON_Format(grades))
+                plot(get_JSON_Format(grades),['grade'])
             }
         }
 
         const incCount = () =>{
             count += 1;
+        }
+
+        const append_grade = (value, index) => {
+            grade.set(value, index)
         }
 
         const incTotalFiles = () =>{
@@ -203,16 +214,17 @@ class Data{
             }
             jsonArray.sort(
                 function (a, b) {
-                    if (a.year > b.year) {
+                    if (a.grade > b.grade) {
                         return 1; 
                     }
-                    if (a.year < b.year) { 
+                    if (a.grade < b.grade) { 
                         return -1; 
                     } 
                     // a must be equal to b 
                     return 0; 
                 }
             )
+            jsonArray.columns =  ["grade", "Ano2007", "Ano2008", "Ano2009", "Ano2010", "Ano2011", "Ano2012", "Ano2013", "Ano2014", "Ano2015", "Ano2016"]
             return jsonArray;
         }
 
