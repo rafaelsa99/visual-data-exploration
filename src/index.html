@@ -44,7 +44,16 @@
     data.alternativas_candidatos('./files_list.csv', 2016,  null)
     data.preferencias_opcoes('./files_list.csv', 2016,  null)
 
-    gbarplot.create_plot("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv",['group'])
+    let test = [
+    {group: "banana", Nitrogen: "12", normal: "1", stress: "13"},
+    {group: "poacee", Nitrogen: "6", normal: "6", stress: "33"},
+    {group: "sorgho", Nitrogen: "11", normal: "28", stress: "12"},
+    {group: "triticum", Nitrogen: "19", normal: "6", stress: "1"}
+    ]
+    test.columns =  ["group", "Nitrogen", "normal", "stress"]
+
+    //gbarplot.create_plot_csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv",['group'])
+    gbarplot.create_plot(test,['group'])
     //radarChart.create_plot(data, radarChartOptions)
 
 </script>
