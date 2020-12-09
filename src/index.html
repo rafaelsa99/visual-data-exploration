@@ -18,6 +18,8 @@
 
 <div id="radar_chart"></div>
 
+<div id="cord_diagram"></div>
+
 
 <!-- Color Scale -->
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
@@ -52,10 +54,6 @@
     ]
     test.columns =  ["group", "Nitrogen", "normal", "stress"]
 
-    var margin = {top: 100, right: 100, bottom: 100, left: 100},
-				width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
-				height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
-
     var dataaa = [
     { name: 'Allocated_budget',
         axes: [
@@ -82,7 +80,6 @@
     var radarChartOptions = {
         w: 490,
         h: 550,
-        margin: margin,
         levels: 5,
         roundStrokes: true,
         color: d3.scaleOrdinal().range(["#AFC52F", "#ff6600"]),
