@@ -111,7 +111,7 @@ class Data{
             countOptions.get(i).set("Opção5", String((options.opt5/sum) * 100));
             countOptions.get(i).set("Opção6", String((options.opt6/sum) * 100));
             if (pos == totalFiles) {
-                plot(get_JSON_Format(countOptions), ['Opção1', 'Opção2', 'Opção3', 'Opção4', 'Opção5', 'Opção6'],['year'],[0,100])
+                plot(get_JSON_Format(countOptions), ['Opção1', 'Opção2', 'Opção3', 'Opção4', 'Opção5', 'Opção6'],['year'],[0,40])
             }
         }
 
