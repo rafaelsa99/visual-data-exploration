@@ -199,7 +199,7 @@ class CordDiagram {
         var showTooltip = (d) => {
             tooltip
                 .style("opacity", 1)
-                .html("Source: " + nameProvider[d.source.index] + "<br>Target: " + nameProvider[d.target.index])
+                .html(nameProvider[d.source.index] + " <-> " + nameProvider[d.target.index])
                 .style("left", (d3.event.pageX + 16) + "px")
                 .style("top", (d3.event.pageY + 16) + "px");
         }

@@ -333,7 +333,7 @@ class RadarChart {
 
         var _this = this;
 
-        var div_id = this.div_id;
+        var div_id = _this.div_id;
 
         var svg = _this.svg;
 
