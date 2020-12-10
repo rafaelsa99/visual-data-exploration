@@ -276,11 +276,13 @@ class Data{
 
     }
 
-    alternativas_candidatos(files_list, year, plot, opcao = 0){
+    alternativas_candidatos(files_list, year, plot, plotColors, opcao = 0){
         var candidaturas_alunos = new Map()
         let listCourses = new Map()
+        var columns_courses = []
         let count = 1;
         let totalFiles = 0;
+        let totalSum = 0;
 
         const append_data = (obj, candidaturas, pos) => {
             var i = candidaturas_alunos.size
@@ -291,29 +293,28 @@ class Data{
                 candidaturas_alunos.get(i).set(key, value);
             }
             if (pos == totalFiles) {
-                console.log(get_JSON_Format(candidaturas_alunos))
-                //plot(get_JSON_Format(grades_courses), Array.from(listCourses),['year'])
+                plot.create_plot(get_Format(candidaturas_alunos), columns_courses, plotColors)
             }  
         }
 
-        const get_JSON_Format = (map) => {
-            var jsonArray = []
-            for(var j of map.values()){
-                jsonArray.push(Object.fromEntries(j));
-            }
-            jsonArray.sort(
-                function (a, b) {
-                    if (a.year > b.year) {
-                        return 1; 
+        const get_Format = (map) => {
+            var matrix = []
+            for(var i of columns_courses){
+                for(var j of map.values()){
+                    if(j.get("course") == i){
+                        var course = []
+                        for(var c of columns_courses){
+                            if(j.get(c) == undefined){
+                                course.push(0);
+                            } else {
+                                course.push((j.get(c) / totalSum) * 100);
+                            }
+                        }
+                        matrix.push(course);
                     }
-                    if (a.year < b.year) { 
-                        return -1; 
-                    } 
-                    // a must be equal to b 
-                    return 0; 
                 }
-            )
-            return jsonArray;
+            }
+            return matrix;
         }
 
         const incCount = () =>{
@@ -324,8 +325,16 @@ class Data{
             totalFiles += 1;
         }
 
+        const incTotalSum = () =>{
+            totalSum += 1;
+        }
+
         const append_course = (name, codes) => {
             listCourses.set(name, codes);
+        }
+
+        const append_column_course = (name) => {
+            columns_courses.push(name);
         }
 
         const is_relevant_course = (cod_c, cod_i) => {
@@ -354,6 +363,7 @@ class Data{
                 if(element.year == year){
                     incTotalFiles()
                     append_course(element.course, {cod_inst:element.cod_institution, cod_course:element.cod_course});
+                    append_column_course(element.course);
                 }
             })
         });
@@ -375,6 +385,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     //Alternativas
                                     if(is_relevant_course(data.Opcao1CursoCodigo,data.Opcao1InstituicaoCodigo) && is_different_course(data.Opcao1CursoCodigo,data.Opcao1InstituicaoCodigo,element.cod_course, element.cod_institution)){
@@ -384,6 +395,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     if(is_relevant_course(data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo) && is_different_course(data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo,element.cod_course, element.cod_institution)){
                                         course_name = get_course_name(data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo)
@@ -392,6 +404,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     if(is_relevant_course(data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo) && is_different_course(data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo,element.cod_course, element.cod_institution)){
                                         course_name = get_course_name(data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo)
@@ -400,6 +413,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     if(is_relevant_course(data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo) && is_different_course(data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo,element.cod_course, element.cod_institution)){
                                         course_name = get_course_name(data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo)
@@ -408,6 +422,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     if(is_relevant_course(data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo) && is_different_course(data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo,element.cod_course, element.cod_institution)){
                                         course_name = get_course_name(data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo)
@@ -416,6 +431,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     if(is_relevant_course(data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo) && is_different_course(data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo,element.cod_course, element.cod_institution)){
                                         course_name = get_course_name(data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo)
@@ -424,6 +440,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     break;
                                 case 1:
@@ -434,6 +451,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     //Alternativa
                                     if(is_relevant_course(data.Opcao1CursoCodigo,data.Opcao1InstituicaoCodigo) && is_different_course(data.Opcao1CursoCodigo,data.Opcao1InstituicaoCodigo,element.cod_course, element.cod_institution)){
@@ -443,6 +461,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     break;
                                 case 2:
@@ -453,6 +472,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     //Alternativa
                                     if(is_relevant_course(data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo) && is_different_course(data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo,element.cod_course, element.cod_institution)){
@@ -462,6 +482,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     break;
                                 case 3:
@@ -472,6 +493,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     //Alternativa
                                     if(is_relevant_course(data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo) && is_different_course(data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo,element.cod_course, element.cod_institution)){
@@ -481,6 +503,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     break;
                                 case 4:
@@ -491,6 +514,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     //Alternativa
                                     if(is_relevant_course(data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo) && is_different_course(data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo,element.cod_course, element.cod_institution)){
@@ -500,6 +524,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     break;
                                 case 5:
@@ -510,6 +535,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     //Alternativa
                                     if(is_relevant_course(data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo) && is_different_course(data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo,element.cod_course, element.cod_institution)){
@@ -519,6 +545,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     break;
                                 case 6:
@@ -529,6 +556,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     //Alternativa
                                     if(is_relevant_course(data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo) && is_different_course(data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo,element.cod_course, element.cod_institution)){
@@ -538,6 +566,7 @@ class Data{
                                         } else {
                                             candidaturas.set(course_name, 1)
                                         }
+                                        incTotalSum();
                                     }
                                     break;
                             }
