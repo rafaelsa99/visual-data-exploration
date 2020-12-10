@@ -6,6 +6,7 @@ class CordDiagram {
         this.height = 800 - this.margin.top - this.margin.bottom;
         this.innerRadius = Math.min(this.width, this.height) * .39;
         this.outerRadius = this.innerRadius * 1.04;
+        this.div_id = div_id;
 
         // append the svg object to the body of the page
         this.svg = d3.select(div_id)
@@ -25,6 +26,7 @@ class CordDiagram {
         var height = _this.height;
         var innerRadius = _this.innerRadius;
         var outerRadius = _this.outerRadius;
+        var div_id = this.div_id;
         var svg = _this.svg;
 
         /*Initiate the color scale*/
@@ -123,7 +125,14 @@ class CordDiagram {
             .style("stroke", function (d) { return d3.rgb(fill(d.source.index)).darker(); })
             .style("fill", function (d) { return fill(d.source.index); })
             .attr("d", d3.ribbon().radius(innerRadius))
-            .attr('opacity', 0);
+            .attr('opacity', 0)
+            .on("mouseover", function (d) { showTooltip(d); })
+            .on("mouseout", function (d) { hideTooltip(d); });
+
+        /*Make all arc visible*/
+        svg.selectAll("g.group").select("path")
+            .transition().duration(1000)
+            .style("opacity", 0.85);
 
         /*Make mouse over and out possible*/
         d3.selectAll(".group")
@@ -170,6 +179,35 @@ class CordDiagram {
             return d3.range(0, d.value, step).map(function (value) {
                 return { value: value, angle: value * k + d.startAngle };
             });
+        }
+
+        // Add a tooltip div. Here I define the general feature of the tooltip: stuff that do not depend on the data point.
+        // Its opacity is set to 0: we don't see it by default.
+        var tooltip = d3.select(div_id)
+            .append("div")
+            .attr("class", "tooltip")
+            .style("position", "absolute")
+            .style("opacity", 0)
+            .style("background-color", "white")
+            .style("border", "solid")
+            .style("border-width", "1px")
+            .style("border-radius", "2px")
+            .style("padding", "10px")
+
+        // A function that change this tooltip when the user hover a point.
+        // Its opacity is set to 1: we can now see it. Plus it set the text and position of tooltip depending on the datapoint (d)
+        var showTooltip = (d) => {
+            tooltip
+                .style("opacity", 1)
+                .html("Source: " + nameProvider[d.source.index] + "<br>Target: " + nameProvider[d.target.index])
+                .style("left", (d3.event.pageX + 16) + "px")
+                .style("top", (d3.event.pageY + 16) + "px");
+        }
+
+        // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
+        var hideTooltip = (d) => {
+            tooltip
+                .style("opacity", 0)
         }
 
     }
