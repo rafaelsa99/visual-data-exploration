@@ -51,7 +51,6 @@
     var cordDiagram = new CordDiagram('#cord_diagram');
 
     data.notas_colocados('./files_list.csv', 'UA-EET', 2007, 2016, gbarplot.create_plot);
-    data.alternativas_candidatos('./files_list.csv', 2016,  null)
 
     let test = [
         { group: "banana", Nitrogen: "12", normal: "1", stress: "13" },
@@ -124,6 +123,8 @@
 
     data.get_range_years('./files_list.csv', null);
 
-    cordDiagram.create_plot(matrix, NameProvider, colors)
+    data.alternativas_candidatos('./files_list.csv', 2016, cordDiagram, colors, 0)
+
+    //cordDiagram.create_plot(matrix, NameProvider, colors)
 
 </script>

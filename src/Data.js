@@ -202,7 +202,6 @@ class Data{
                 grades.get(i).set(String("Ano" + obj.year), String(value));
             }
             if (pos == totalFiles) {
-                console.log(get_JSON_Format(grades))
                 plot(get_JSON_Format(grades),['grade'])
             }
         }
@@ -277,11 +276,13 @@ class Data{
 
     }
 
-    alternativas_candidatos(files_list, year, plot){
+    alternativas_candidatos(files_list, year, plot, plotColors, opcao = 0){
         var candidaturas_alunos = new Map()
         let listCourses = new Map()
+        var columns_courses = []
         let count = 1;
         let totalFiles = 0;
+        let totalSum = 0;
 
         const append_data = (obj, candidaturas, pos) => {
             var i = candidaturas_alunos.size
@@ -292,29 +293,28 @@ class Data{
                 candidaturas_alunos.get(i).set(key, value);
             }
             if (pos == totalFiles) {
-                //console.log(get_JSON_Format(candidaturas_alunos))
-                //plot(get_JSON_Format(grades_courses), Array.from(listCourses),['year'])
+                plot.create_plot(get_Format(candidaturas_alunos), columns_courses, plotColors)
             }  
         }
 
-        const get_JSON_Format = (map) => {
-            var jsonArray = []
-            for(var j of map.values()){
-                jsonArray.push(Object.fromEntries(j));
-            }
-            jsonArray.sort(
-                function (a, b) {
-                    if (a.year > b.year) {
-                        return 1; 
+        const get_Format = (map) => {
+            var matrix = []
+            for(var i of columns_courses){
+                for(var j of map.values()){
+                    if(j.get("course") == i){
+                        var course = []
+                        for(var c of columns_courses){
+                            if(j.get(c) == undefined){
+                                course.push(0);
+                            } else {
+                                course.push((j.get(c) / totalSum) * 100);
+                            }
+                        }
+                        matrix.push(course);
                     }
-                    if (a.year < b.year) { 
-                        return -1; 
-                    } 
-                    // a must be equal to b 
-                    return 0; 
                 }
-            )
-            return jsonArray;
+            }
+            return matrix;
         }
 
         const incCount = () =>{
@@ -325,8 +325,16 @@ class Data{
             totalFiles += 1;
         }
 
+        const incTotalSum = () =>{
+            totalSum += 1;
+        }
+
         const append_course = (name, codes) => {
             listCourses.set(name, codes);
+        }
+
+        const append_column_course = (name) => {
+            columns_courses.push(name);
         }
 
         const is_relevant_course = (cod_c, cod_i) => {
@@ -355,6 +363,7 @@ class Data{
                 if(element.year == year){
                     incTotalFiles()
                     append_course(element.course, {cod_inst:element.cod_institution, cod_course:element.cod_course});
+                    append_column_course(element.course);
                 }
             })
         });
@@ -367,62 +376,199 @@ class Data{
                         var candidaturas = new Map()
                         var course_name;
                         data_file.forEach(data => {
-                            if(!is_different_course(data.ColocCursoCodigo,data.ColocInstituicaoCodigo,element.cod_course, element.cod_institution)){ //Curso colocado
-                                course_name = get_course_name(data.ColocCursoCodigo,data.ColocInstituicaoCodigo)
-                                if(candidaturas.has(course_name)){
-                                    candidaturas.set(course_name, candidaturas.get(course_name) + 1)
-                                } else {
-                                    candidaturas.set(course_name, 1)
-                                }
-                            }
-                            //Alternativas
-                            if(is_relevant_course(data.Opcao1CursoCodigo,data.Opcao1InstituicaoCodigo) && is_different_course(data.Opcao1CursoCodigo,data.Opcao1InstituicaoCodigo,element.cod_course, element.cod_institution)){
-                                course_name = get_course_name(data.Opcao1CursoCodigo,data.Opcao1InstituicaoCodigo)
-                                if(candidaturas.has(course_name)){
-                                    candidaturas.set(course_name, candidaturas.get(course_name) + 1)
-                                } else {
-                                    candidaturas.set(course_name, 1)
-                                }
-                            }
-                            if(is_relevant_course(data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo) && is_different_course(data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo,element.cod_course, element.cod_institution)){
-                                course_name = get_course_name(data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo)
-                                if(candidaturas.has(course_name)){
-                                    candidaturas.set(course_name, candidaturas.get(course_name) + 1)
-                                } else {
-                                    candidaturas.set(course_name, 1)
-                                }
-                            }
-                            if(is_relevant_course(data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo) && is_different_course(data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo,element.cod_course, element.cod_institution)){
-                                course_name = get_course_name(data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo)
-                                if(candidaturas.has(course_name)){
-                                    candidaturas.set(course_name, candidaturas.get(course_name) + 1)
-                                } else {
-                                    candidaturas.set(course_name, 1)
-                                }
-                            }
-                            if(is_relevant_course(data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo) && is_different_course(data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo,element.cod_course, element.cod_institution)){
-                                course_name = get_course_name(data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo)
-                                if(candidaturas.has(course_name)){
-                                    candidaturas.set(course_name, candidaturas.get(course_name) + 1)
-                                } else {
-                                    candidaturas.set(course_name, 1)
-                                }
-                            }
-                            if(is_relevant_course(data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo) && is_different_course(data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo,element.cod_course, element.cod_institution)){
-                                course_name = get_course_name(data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo)
-                                if(candidaturas.has(course_name)){
-                                    candidaturas.set(course_name, candidaturas.get(course_name) + 1)
-                                } else {
-                                    candidaturas.set(course_name, 1)
-                                }
-                            }
-                            if(is_relevant_course(data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo) && is_different_course(data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo,element.cod_course, element.cod_institution)){
-                                course_name = get_course_name(data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo)
-                                if(candidaturas.has(course_name)){
-                                    candidaturas.set(course_name, candidaturas.get(course_name) + 1)
-                                } else {
-                                    candidaturas.set(course_name, 1)
-                                }
+                            switch(opcao){
+                                case 0: //All options
+                                    if(!is_different_course(data.ColocCursoCodigo,data.ColocInstituicaoCodigo,element.cod_course, element.cod_institution)){ //Curso colocado
+                                        course_name = get_course_name(data.ColocCursoCodigo,data.ColocInstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    //Alternativas
+                                    if(is_relevant_course(data.Opcao1CursoCodigo,data.Opcao1InstituicaoCodigo) && is_different_course(data.Opcao1CursoCodigo,data.Opcao1InstituicaoCodigo,element.cod_course, element.cod_institution)){
+                                        course_name = get_course_name(data.Opcao1CursoCodigo,data.Opcao1InstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    if(is_relevant_course(data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo) && is_different_course(data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo,element.cod_course, element.cod_institution)){
+                                        course_name = get_course_name(data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    if(is_relevant_course(data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo) && is_different_course(data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo,element.cod_course, element.cod_institution)){
+                                        course_name = get_course_name(data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    if(is_relevant_course(data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo) && is_different_course(data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo,element.cod_course, element.cod_institution)){
+                                        course_name = get_course_name(data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    if(is_relevant_course(data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo) && is_different_course(data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo,element.cod_course, element.cod_institution)){
+                                        course_name = get_course_name(data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    if(is_relevant_course(data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo) && is_different_course(data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo,element.cod_course, element.cod_institution)){
+                                        course_name = get_course_name(data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    break;
+                                case 1:
+                                    if(!is_different_course(data.ColocCursoCodigo,data.ColocInstituicaoCodigo,element.cod_course, element.cod_institution) && !is_different_course(data.ColocCursoCodigo,data.ColocInstituicaoCodigo,data.Opcao1CursoCodigo,data.Opcao1InstituicaoCodigo)){ //Curso colocado
+                                        course_name = get_course_name(data.ColocCursoCodigo,data.ColocInstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    //Alternativa
+                                    if(is_relevant_course(data.Opcao1CursoCodigo,data.Opcao1InstituicaoCodigo) && is_different_course(data.Opcao1CursoCodigo,data.Opcao1InstituicaoCodigo,element.cod_course, element.cod_institution)){
+                                        course_name = get_course_name(data.Opcao1CursoCodigo,data.Opcao1InstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    break;
+                                case 2:
+                                    if(!is_different_course(data.ColocCursoCodigo,data.ColocInstituicaoCodigo,element.cod_course, element.cod_institution) && !is_different_course(data.ColocCursoCodigo,data.ColocInstituicaoCodigo,data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo)){ //Curso colocado
+                                        course_name = get_course_name(data.ColocCursoCodigo,data.ColocInstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    //Alternativa
+                                    if(is_relevant_course(data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo) && is_different_course(data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo,element.cod_course, element.cod_institution)){
+                                        course_name = get_course_name(data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    break;
+                                case 3:
+                                    if(!is_different_course(data.ColocCursoCodigo,data.ColocInstituicaoCodigo,element.cod_course, element.cod_institution) && !is_different_course(data.ColocCursoCodigo,data.ColocInstituicaoCodigo,data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo)){ //Curso colocado
+                                        course_name = get_course_name(data.ColocCursoCodigo,data.ColocInstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    //Alternativa
+                                    if(is_relevant_course(data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo) && is_different_course(data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo,element.cod_course, element.cod_institution)){
+                                        course_name = get_course_name(data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    break;
+                                case 4:
+                                    if(!is_different_course(data.ColocCursoCodigo,data.ColocInstituicaoCodigo,element.cod_course, element.cod_institution) && !is_different_course(data.ColocCursoCodigo,data.ColocInstituicaoCodigo,data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo)){ //Curso colocado
+                                        course_name = get_course_name(data.ColocCursoCodigo,data.ColocInstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    //Alternativa
+                                    if(is_relevant_course(data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo) && is_different_course(data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo,element.cod_course, element.cod_institution)){
+                                        course_name = get_course_name(data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    break;
+                                case 5:
+                                    if(!is_different_course(data.ColocCursoCodigo,data.ColocInstituicaoCodigo,element.cod_course, element.cod_institution) && !is_different_course(data.ColocCursoCodigo,data.ColocInstituicaoCodigo,data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo)){ //Curso colocado
+                                        course_name = get_course_name(data.ColocCursoCodigo,data.ColocInstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    //Alternativa
+                                    if(is_relevant_course(data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo) && is_different_course(data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo,element.cod_course, element.cod_institution)){
+                                        course_name = get_course_name(data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    break;
+                                case 6:
+                                    if(!is_different_course(data.ColocCursoCodigo,data.ColocInstituicaoCodigo,element.cod_course, element.cod_institution) && !is_different_course(data.ColocCursoCodigo,data.ColocInstituicaoCodigo,data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo)){ //Curso colocado
+                                        course_name = get_course_name(data.ColocCursoCodigo,data.ColocInstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    //Alternativa
+                                    if(is_relevant_course(data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo) && is_different_course(data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo,element.cod_course, element.cod_institution)){
+                                        course_name = get_course_name(data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo)
+                                        if(candidaturas.has(course_name)){
+                                            candidaturas.set(course_name, candidaturas.get(course_name) + 1)
+                                        } else {
+                                            candidaturas.set(course_name, 1)
+                                        }
+                                        incTotalSum();
+                                    }
+                                    break;
                             }
                         });
                         append_data(element, candidaturas, count)
@@ -449,7 +595,6 @@ class Data{
                 optionsCourse.get(i).set(key, value);
             }
             if (pos == totalFiles) {
-                console.log(get_JSON_Format(optionsCourse))
                 plot.create_plot(get_JSON_Format(optionsCourse), plotOptions)
             }  
         }
