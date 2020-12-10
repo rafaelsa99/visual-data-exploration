@@ -38,19 +38,17 @@
     var data = new Data();
 
     var lineplotNotas = new LinePlot('#lineplotNotas');
-    data.notas_ultimos_colocados('./files_list.csv', lineplotNotas.create_plot);
+    data.notas_ultimos_colocados('./files_list.csv', 2007, 2016, lineplotNotas.create_plot);
 
     var lineplotOpcoes = new LinePlot('#lineplotOpcoes');
-    data.percentagem_posicao_curso('./files_list.csv', 'UA-EET', lineplotOpcoes.create_plot);
+    data.percentagem_posicao_curso('./files_list.csv', 'UA-EET', 2007, 2016, lineplotOpcoes.create_plot);
 
     var gbarplot = new GroupedBarPlot('#grouped_bar_plot');
     var radarChart = new RadarChart('#radar_chart');
     var cordDiagram = new CordDiagram('#cord_diagram');
 
-    data.notas_colocados('./files_list.csv', 'UA-EET', null);
-    data.notas_colocados('./files_list.csv', 'UA-EET', null);
-    data.alternativas_candidatos('./files_list.csv', 2016, null)
-    data.preferencias_opcoes('./files_list.csv', 2016, null)
+    data.notas_colocados('./files_list.csv', 'UA-EET', 2007, 2016, gbarplot.create_plot);
+    data.alternativas_candidatos('./files_list.csv', 2016,  null)
 
     let test = [
         { group: "banana", Nitrogen: "12", normal: "1", stress: "13" },
@@ -90,9 +88,9 @@
         h: 550,
         levels: 5,
         roundStrokes: true,
-        color: d3.scaleOrdinal().range(["#AFC52F", "#ff6600"]),
+        color: d3.scaleOrdinal().range(["#AFC52F", "#ff6600", "#3258a8", "#db2121", "#fffb26", "#5c350b" , "#c10ec4", "#0ec4af"]),
         format: '.0f',
-        legend: { title: 'Notas', translateX: -35, translateY: -300 },
+        legend: { title: 'Cursos', translateX: -35, translateY: -300 },
         unit: ''
     };
 
@@ -117,8 +115,12 @@
     var colors = ["#C4C4C4", "#69B40F", "#EC1D25", "#C8125C", "#008FC8", "#10218B", "#134B24", "#737373"];
 
     //gbarplot.create_plot_csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv",['group'])
-    gbarplot.create_plot(test, ['group'])
-    radarChart.create_plot(dataaa, radarChartOptions)
+    //gbarplot.create_plot(test,["group"])
+    data.preferencias_opcoes('./files_list.csv', 2016,  radarChart, radarChartOptions)
+    //radarChart.create_plot(dataaa, radarChartOptions)
+
+    data.get_range_years('./files_list.csv', null);
+
     cordDiagram.create_plot(matrix, NameProvider, colors)
 
 </script>
