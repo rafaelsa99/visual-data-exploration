@@ -293,7 +293,8 @@ class Data{
                 candidaturas_alunos.get(i).set(key, value);
             }
             if (pos == totalFiles) {
-                plot.create_plot(get_Format(candidaturas_alunos), columns_courses, plotColors)
+                plot.cleanPlot();
+                plot.create_plot(get_Format(candidaturas_alunos), columns_courses, plotColors);
             }  
         }
 
@@ -746,7 +747,7 @@ class Data{
         })
     }
 
-    get_range_years(files_list, sliderFunction, course = "all"){
+    get_range_years(files_list, dataClass, chart, chartOptions, plot, course = "all"){
         var min_year, max_year, isFirst = true, count = 0;
         d3.csv(files_list, function(data){
             data.forEach(element => {
@@ -765,7 +766,7 @@ class Data{
                     }
                 }
             })
-            //sliderFunction(min_year, max_year);
+            plot.plot_alternativas_candidatos('./files_list.csv', dataClass, chart, chartOptions, min_year, max_year)
         });
     }
 
