@@ -202,11 +202,11 @@ class GroupedBarPlot {
             .enter()
             .append('g')
             .append("text")
-            .attr("class", "Median")
+            .attr("class", "Mean")
             .attr('transform', `translate(${400},${400})`)
             .attr("x", width / 2 - 65)
             .attr("y", (d, i) => i * 20)
-            .text("Median")
+            .text("Mean")
             .style("fill", "#520f0f")
             .style("font-size", 20)
             .on("click", function (d) {
