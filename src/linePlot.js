@@ -208,7 +208,12 @@ class LinePlot {
             .attr("class", function (d) { return d.name })
             // Second we need to enter in the 'values' part of this group
             .selectAll("myPoints")
-            .data(function (d) { return d.values })
+            .data(function (d) { 
+                d.values.forEach(element => {
+                    element["name"] = d.name
+                });
+                return d.values 
+            })
             .enter()
             .append("circle")
             .attr("cx", function (d) { return x(d.h_axis) })
@@ -271,7 +276,7 @@ class LinePlot {
         var showTooltip = (d) => {
             tooltip
                 .style("opacity", 1)
-                .html("Value: " + d.value.toFixed(2) + "<br>Year: " + d.h_axis)
+                .html("Value: " + d.value.toFixed(2) + "<br>" + d.name)
                 .style("left", (d3.event.pageX + 16) + "px")
                 .style("top", (d3.event.pageY + 16) + "px");
         }
