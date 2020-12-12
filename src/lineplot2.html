@@ -97,8 +97,25 @@
 
       <div class="page-section about-page">
         <div class="about-section">
-          <!-- Create a div where the graph will take place -->
-
+          <div class="container">
+            <div class="row">
+              <div class="col-sm" style="margin: auto;">
+                <label for="course">Choose a course:</label>
+                <select id="course">
+                </select>
+              </div>
+              <div class="col-sm">
+                <div class="row align-items-center">
+                  <div style="display: none;">
+                    <p id="value-range"></p>
+                  </div>
+                  <div class="col-sm" style="margin: auto;">
+                    <div id="slider-range"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div id="lineplotOpcoes"></div>
         </div>
       </div>
@@ -137,10 +154,19 @@
   <script type="module">
     import Data from './js/d3/Data.js';
     import LinePlot from './js/d3/linePlot.js';
+    import Plot from './js/d3/plot.js';
     var data = new Data();
-
+    
+    var plotLine = new Plot('div#slider-range', 'p#value-range');
     var lineplotOpcoes = new LinePlot('#lineplotOpcoes');
-    data.percentagem_posicao_curso('./files_list.csv', 'UA-EET', 2007, 2016, lineplotOpcoes.create_plot);
+    data.set_course_selection('./files_list.csv', '#course');
+    data.plot_percentagem_posicao_curso('./files_list.csv', data, lineplotOpcoes, plotLine, 'UA-EET');
+
+    d3.select('#course')
+      .on('change', function () {
+        d3.select('div#slider-range').select("svg").remove();
+        data.plot_percentagem_posicao_curso('./files_list.csv', data, lineplotOpcoes, plotLine, this.value);
+      });
   </script>
 
 </body>

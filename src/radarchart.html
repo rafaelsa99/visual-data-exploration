@@ -104,6 +104,18 @@
           </div>
           <div>
             <div id="radar_chart"></div>
+            <div class="container">
+              <div class="col-sm">
+                <div class="row align-items-center">
+                  <div style="display: none;">
+                    <p id="value-range"></p>
+                  </div>
+                  <div class="col-sm" style="margin: auto;">
+                    <div id="slider-range"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <label for="duration">Duration of the animation (seconds): </label>
             <input type="number" step="0.5" min="0.5" value="1.0" id="duration" /><br><br>
             <input name="updateButton" type="button" value="See Evolution" id="viewAnimation" />
@@ -148,21 +160,6 @@
     import Plot from './js/d3/plot.js';
     var data = new Data();
 
-
-    document.getElementById("viewAnimation").onclick = function () {
-      const delayLoop = (fn, delay) => {
-        return (x, i) => {
-          setTimeout(() => {
-            fn(x);
-          }, i * delay);
-        };
-      };
-      let rangeYears = [2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016]
-      let interval = 2000;
-      var promise = Promise.resolve();
-      rangeYears.forEach(delayLoop(updateData, d3.select('#duration').property("value") * 1000));
-    };
-
     var radarChartOptions = {
       w: 490,
       h: 550,
@@ -176,17 +173,10 @@
 
     var radarChart = new RadarChart('#radar_chart');
     var plotRadarChart = new Plot('#sliderRadar', '#labelRadar');
+    var plotEvolucao = new Plot('div#slider-range', 'p#value-range');
     data.plot_preferencias_opcoes('./files_list.csv', data, radarChart, radarChartOptions, plotRadarChart);
-    // ** Update data section (Called from the onclick)
-    function updateData(element) {
-      //radarChart.clean_plot();
-      setTimeout(function () {
-        data.preferencias_opcoes('./files_list.csv', element, radarChart, radarChartOptions);
-        d3.select("#sliderRadar").property("value", element);
-        d3.select("#labelRadar").text(element);
-      }, 250)
-      // Get the data again
-    }
+    data.plot_evolucao('./files_list.csv', data, "viewAnimation", plotEvolucao, radarChart, radarChartOptions);
+
   </script>
 
 </body>

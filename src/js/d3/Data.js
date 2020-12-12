@@ -24,7 +24,8 @@ class Data{
                 axis_max = min_grade
             }
             if (pos == totalFiles) {
-                plot(get_JSON_Format(grades_courses), Array.from(listCourses),['year'],[100,axis_max + 5])
+                plot.cleanPlot();
+                plot.create_plot(get_JSON_Format(grades_courses), Array.from(listCourses),['year'],[100,axis_max + 5])
             }  
         }
 
@@ -128,7 +129,8 @@ class Data{
                 axis_max = ((options.opt6/sum) * 100);
             }
             if (pos == totalFiles) {
-                plot(get_JSON_Format(countOptions), ['Opção1', 'Opção2', 'Opção3', 'Opção4', 'Opção5', 'Opção6'],['year'],[0,axis_max + 3])
+                plot.cleanPlot();
+                plot.create_plot(get_JSON_Format(countOptions), ['Opção1', 'Opção2', 'Opção3', 'Opção4', 'Opção5', 'Opção6'],['year'],[0,axis_max + 3])
             }
         }
 
@@ -788,7 +790,7 @@ class Data{
                     }
                 }
             })
-            plot.plot_alternativas_candidatos('./files_list.csv', dataClass, chart, chartOptions, min_year, max_year)
+            plot.plot_alternativas_candidatos(files_list, dataClass, chart, chartOptions, min_year, max_year)
         });
     }
 
@@ -811,7 +813,7 @@ class Data{
                     }
                 }
             })
-            plot.plot_preferencias_opcoes('./files_list.csv', dataClass, chart, chartOptions, min_year, max_year)
+            plot.plot_preferencias_opcoes(files_list, dataClass, chart, chartOptions, min_year, max_year)
         });
     }
 
@@ -841,7 +843,51 @@ class Data{
             for(var y of yearsSet){
                 years.push(parseInt(y));
             }
-            plot.plot_notas_colocados('./files_list.csv', dataClass, chart, years, course);
+            plot.plot_notas_colocados(files_list, dataClass, chart, years, course);
+        });
+    }
+
+    plot_notas_ultimos_colocados(files_list, dataClass, chart, plot){
+        var yearsSet = new Set();
+        d3.csv(files_list, function(data){
+            data.forEach(element => {
+                yearsSet.add(element.year);
+            })
+            var years = []
+            for(var y of yearsSet){
+                years.push(parseInt(y));
+            }
+            plot.plot_notas_ultimos_colocados(files_list, dataClass, chart, years);
+        });
+    }
+
+    plot_evolucao(files_list, dataClass, buttonID, plot, chart, chartOptions){
+        var yearsSet = new Set();
+        d3.csv(files_list, function(data){
+            data.forEach(element => {
+                yearsSet.add(element.year);
+            })
+            var years = []
+            for(var y of yearsSet){
+                years.push(parseInt(y));
+            }
+            plot.plot_evolucao(files_list, dataClass, buttonID, years, chart, chartOptions);
+        });
+    }
+
+    plot_percentagem_posicao_curso(files_list, dataClass, chart, plot, course = "all"){
+        var yearsSet = new Set();
+        d3.csv(files_list, function(data){
+            data.forEach(element => {
+                if(course == "all" || element.course == course){
+                    yearsSet.add(element.year);
+                }
+            })
+            var years = []
+            for(var y of yearsSet){
+                years.push(parseInt(y));
+            }
+            plot.plot_percentagem_posicao_curso(files_list, dataClass, chart, years, course);
         });
     }
 }
