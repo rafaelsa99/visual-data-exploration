@@ -59,7 +59,7 @@ class Plot {
         let call_BarPlot = (min, max) => {
             dataClass.notas_colocados(files_list, course, min, max, plot);
         }
-        
+
         dataClass.notas_colocados(files_list, course, d3v6.min(data), d3v6.max(data), plot);
 
         var sliderRange = d3v6
@@ -68,7 +68,8 @@ class Plot {
             .max(d3v6.max(data))
             .step(1)
             .width(300)
-            .ticks(6)
+            .ticks(data.length)
+            .tickFormat(d3v6.format('d'))
             .default([data[0], data[data.length - 1]])
             .fill('#2196f3')
             .on('onchange', val => {
@@ -91,10 +92,149 @@ class Plot {
             sliderRange
                 .value()
                 .map(d3v6.format(''))
-                .join('-')
+        );
+    }
+
+    plot_notas_ultimos_colocados(files_list, dataClass, plot, data) {
+        // Range
+        let call_BarPlot = (min, max) => {
+            dataClass.notas_ultimos_colocados(files_list, min, max, plot);
+        }
+
+        dataClass.notas_ultimos_colocados(files_list, d3v6.min(data), d3v6.max(data), plot);
+
+        var sliderRange = d3v6
+            .sliderBottom()
+            .min(d3v6.min(data))
+            .max(d3v6.max(data))
+            .step(1)
+            .width(300)
+            .ticks(data.length)
+            .tickFormat(d3v6.format('d'))
+            .default([data[0], data[data.length - 1]])
+            .fill('#2196f3')
+            .on('onchange', val => {
+                d3v6.select(this.label_id).text(val.map(d3v6.format('')));
+                let rangeVal = d3v6.select(this.label_id)._groups[0][0].innerHTML.split(",")
+                call_BarPlot(rangeVal[0], rangeVal[1])
+            });
+
+        var gRange = d3v6
+            .select(this.input_id)
+            .append('svg')
+            .attr('width', 500)
+            .attr('height', 100)
+            .append('g')
+            .attr('transform', 'translate(30,30)');
+
+        gRange.call(sliderRange);
+
+        d3v6.select(this.label_id).text(
+            sliderRange
+                .value()
+                .map(d3v6.format(''))
+        );
+    }
+
+    plot_evolucao(files_list, dataClass, buttonID, data, chart, chartOptions) {
+
+        document.getElementById(buttonID).onclick = function () {
+            const delayLoop = (fn, delay) => {
+                return (x, i) => {
+                    setTimeout(() => {
+                        fn(x);
+                    }, i * delay);
+                };
+            };
+            let rangeYears = []
+            let rangeVal = d3v6.select('p#value-range')._groups[0][0].innerHTML.split(",")
+            console.log(rangeVal)
+            for(var i = parseInt(rangeVal[0]); i <= parseInt(rangeVal[1]); i++){
+                rangeYears.push(i)
+            }
+            var promise = Promise.resolve();
+            rangeYears.forEach(delayLoop(updateData, d3.select('#duration').property("value") * 1000));
+        };
+
+        var sliderRange = d3v6
+            .sliderBottom()
+            .min(d3v6.min(data))
+            .max(d3v6.max(data))
+            .step(1)
+            .width(300)
+            .ticks(data.length)
+            .tickFormat(d3v6.format('d'))
+            .default([data[0], data[data.length - 1]])
+            .fill('#2196f3')
+            .on('onchange', val => {
+                d3v6.select(this.label_id).text(val.map(d3v6.format('')));
+            });
+
+        var gRange = d3v6
+            .select(this.input_id)
+            .append('svg')
+            .attr('width', 500)
+            .attr('height', 100)
+            .append('g')
+            .attr('transform', 'translate(30,30)');
+
+        gRange.call(sliderRange);
+
+        d3v6.select(this.label_id).text(
+            sliderRange
+                .value()
+                .map(d3v6.format(''))
         );
 
-        
+        // ** Update data section (Called from the onclick)
+        function updateData(element) {
+            setTimeout(function () {
+                dataClass.preferencias_opcoes(files_list, element, chart, chartOptions);
+                d3.select("#sliderRadar").property("value", element);
+                d3.select("#labelRadar").text(element);
+            }, 250)
+        }
+    }
+
+    plot_percentagem_posicao_curso(files_list, dataClass, plot, data, course) {
+        // Range
+        let call_BarPlot = (min, max) => {
+            dataClass.percentagem_posicao_curso(files_list, course, min, max, plot);
+        }
+
+        dataClass.percentagem_posicao_curso(files_list, course, d3v6.min(data), d3v6.max(data), plot);
+
+        var sliderRange = d3v6
+            .sliderBottom()
+            .min(d3v6.min(data))
+            .max(d3v6.max(data))
+            .step(1)
+            .width(300)
+            .ticks(data.length)
+            .tickFormat(d3v6.format('d'))
+            .default([data[0], data[data.length - 1]])
+            .fill('#2196f3')
+            .on('onchange', val => {
+                d3v6.select(this.label_id).text(val.map(d3v6.format('')));
+                let rangeVal = d3v6.select(this.label_id)._groups[0][0].innerHTML.split(",")
+                call_BarPlot(rangeVal[0], rangeVal[1])
+            });
+
+        var gRange = d3v6
+            .select(this.input_id)
+            .append('svg')
+            .attr('width', 500)
+            .attr('height', 100)
+            .append('g')
+            .attr('transform', 'translate(30,30)');
+
+        gRange.call(sliderRange);
+
+        d3v6.select(this.label_id).text(
+            sliderRange
+                .value()
+                .map(d3v6.format(''))
+        );
     }
 }
 

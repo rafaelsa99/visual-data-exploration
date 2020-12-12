@@ -132,6 +132,19 @@ class LinePlot {
         })
     }
 
+    cleanPlot(){
+        var _this = this;
+        var div_id = _this.div_id;
+        d3.select(div_id).select("svg").remove();
+        // append the svg object to the body of the page
+        _this.svg = d3.select(div_id)
+            .append("svg")
+            .attr("width", this.width + this.margin.left + this.margin.right)
+            .attr("height", this.height + this.margin.top + this.margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+    }
+
     create_plot = (data, columns, label_x_axis, y_axis_domain, label_y_axis) => {
 
         var _this = this;
@@ -158,8 +171,6 @@ class LinePlot {
                 })
             };
         });
-        // I strongly advise to have a look to dataReady with
-        console.log(dataReady)
 
         // A color scale: one color for each group
         var myColor = d3.scaleOrdinal()
@@ -172,9 +183,10 @@ class LinePlot {
             .domain(d3.extent(data, function (d) { return +d[label_x_axis]; })).nice()
             //.range([ 0, (width / (dataReady.length+1))]);
             .range([0, width]);
-        svg.append("g")
+        
+            svg.append("g")
             .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x).tickFormat(d3.format("d")));
+            .call(d3.axisBottom(x).ticks(data.length).tickFormat(d3.format("d")));
 
         // text label for the x axis
         svg.append("text")
