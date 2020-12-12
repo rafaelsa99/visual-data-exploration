@@ -222,7 +222,8 @@ class Data{
                 }
             }
             if (pos == totalFiles) {
-                plot(get_JSON_Format(grades),['grade'], [0, axis_max+3])
+                plot.clean_plot()
+                plot.create_plot(get_JSON_Format(grades),['grade'],[0, axis_max])
             }
         }
 

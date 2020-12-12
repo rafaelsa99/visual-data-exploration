@@ -16,26 +16,18 @@ class GroupedBarPlot {
                 "translate(" + this.margin.left + "," + this.margin.top + ")");
     }
 
-    cleanPlot(){
+    clean_plot(){
         var _this = this;
-        var margin = _this.margin;
-        var width = _this.width;
-        var height = _this.height;
         var div_id = _this.div_id;
-        var svg = _this.svg;
-        //Remove whatever chart with the same id/class was present before
-        //svg.selectAll(".radarArea").remove();
-        //svg.selectAll(".radarStroke").remove();
-        //svg.selectAll(".radarCircleWrapper").remove();
-        //svg.selectAll(".radarCircle").remove();
         d3.select(div_id).select("svg").remove();
-        // append the svg object to the body of the page
         _this.svg = d3.select(div_id)
             .append("svg")
             .attr("width", this.width + this.margin.left + this.margin.right)
             .attr("height", this.height + this.margin.top + this.margin.bottom)
+            .attr("class", "radar")
             .append("g")
-            .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+            .attr("transform",
+                "translate(" + this.margin.left + "," + this.margin.top + ")");
     }
 
     create_plot_csv = (csv_file, label_x_axis) => {
