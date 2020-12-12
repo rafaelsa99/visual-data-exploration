@@ -16,6 +16,20 @@ class GroupedBarPlot {
                 "translate(" + this.margin.left + "," + this.margin.top + ")");
     }
 
+    clean_plot(){
+        var _this = this;
+        var div_id = _this.div_id;
+        d3.select(div_id).select("svg").remove();
+        _this.svg = d3.select(div_id)
+            .append("svg")
+            .attr("width", this.width + this.margin.left + this.margin.right)
+            .attr("height", this.height + this.margin.top + this.margin.bottom)
+            .attr("class", "radar")
+            .append("g")
+            .attr("transform",
+                "translate(" + this.margin.left + "," + this.margin.top + ")");
+    }
+
     create_plot_csv = (csv_file, label_x_axis) => {
 
         var _this = this;

@@ -202,7 +202,8 @@ class Data{
                 grades.get(i).set(String("Ano" + obj.year), String(value));
             }
             if (pos == totalFiles) {
-                plot(get_JSON_Format(grades),['grade'])
+                plot.clean_plot()
+                plot.create_plot(get_JSON_Format(grades),['grade'])
             }
         }
 

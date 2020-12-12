@@ -1,6 +1,7 @@
 <!-- Code from d3-graph-gallery.com -->
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <!-- Google fonts -->
@@ -12,10 +13,16 @@
     <link rel="stylesheet" href="styleCord.css">
 
     <!-- Load d3.js -->
-    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
+    <script>
+        d3v6 = d3
+        window.d3 = null
+    </script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
 
 </head>
+
 <body>
     <!-- Create a div where the graph will take place -->
 
@@ -23,6 +30,15 @@
 
     <div id="lineplotOpcoes"></div>
 
+    <h2>Range</h2>
+    <div class="row align-items-center">
+        <div class="col-sm-2">
+            <p id="value-range"></p>
+        </div>
+        <div class="col-sm">
+            <div id="slider-range"></div>
+        </div>
+    </div>
     <div id="grouped_bar_plot"></div>
 
     <div>
@@ -32,22 +48,22 @@
 
     <h2>Year</h2>
     <div id="slider_container">
-        <input type="range" id="slider"/>
+        <input type="range" id="slider" />
         <p id="label"> </p>
     </div>
     <br>
     <h2>Options</h2>
     <label for="option">Choose an option:</label>
     <select id="option">
-    <option value="0">All Options</option>
-    <optgroup label="Options">
-        <option value="1">Option 1</option>
-        <option value="2">Option 2</option>
-        <option value="3">Option 3</option>
-        <option value="4">Option 4</option>
-        <option value="5">Option 5</option>
-        <option value="6">Option 6</option>
-    </optgroup>
+        <option value="0">All Options</option>
+        <optgroup label="Options">
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+            <option value="4">Option 4</option>
+            <option value="5">Option 5</option>
+            <option value="6">Option 6</option>
+        </optgroup>
     </select>
     <div id="cord_diagram"></div>
 
@@ -61,18 +77,52 @@
     <script type="module">
 
         document.getElementById("viewAnimation").onclick = function () {
-                const delayLoop = (fn, delay) => {
-                    return (x, i) => {
-                        setTimeout(() => {
-                            fn(x);
-                        }, i * delay);
-                    };
+            const delayLoop = (fn, delay) => {
+                return (x, i) => {
+                    setTimeout(() => {
+                        fn(x);
+                    }, i * delay);
                 };
-                let rangeYears = [2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016]
-                let interval = 2000;
-                var promise = Promise.resolve();
-                rangeYears.forEach(delayLoop(updateData, 3000));
             };
+            let rangeYears = [2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016]
+            let interval = 2000;
+            var promise = Promise.resolve();
+            rangeYears.forEach(delayLoop(updateData, 3000));
+        };
+
+        // Range
+        var data = [2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016];
+        var sliderRange = d3v6
+            .sliderBottom()
+            .min(d3v6.min(data))
+            .max(d3v6.max(data))
+            .step(1)
+            .width(300)
+            .ticks(6)
+            .default([data[0],data[data.length-1]])
+            .fill('#2196f3')
+            .on('onchange', val => {
+                d3v6.select('p#value-range').text(val.map(d3v6.format('')));
+                let rangeVal = d3v6.select('p#value-range')._groups[0][0].innerHTML.split(",")
+                call_BarPlot(rangeVal[0], rangeVal[1])
+            });
+
+        var gRange = d3v6
+            .select('div#slider-range')
+            .append('svg')
+            .attr('width', 500)
+            .attr('height', 100)
+            .append('g')
+            .attr('transform', 'translate(30,30)');
+
+        gRange.call(sliderRange);
+
+        d3v6.select('p#value-range').text(
+            sliderRange
+                .value()
+                .map(d3v6.format(''))
+                .join('-')
+        );
 
         import Data from './Data.js';
         import LinePlot from './linePlot.js';
@@ -91,8 +141,12 @@
         var gbarplot = new GroupedBarPlot('#grouped_bar_plot');
         var radarChart = new RadarChart('#radar_chart');
         var cordDiagram = new CordDiagram('#cord_diagram');
+            
+        data.notas_colocados('./files_list.csv', 'UA-EET', 2007, 2016, gbarplot);
 
-        data.notas_colocados('./files_list.csv', 'UA-EET', 2007, 2016, gbarplot.create_plot);
+        let call_BarPlot = (min, max) => {
+            data.notas_colocados('./files_list.csv', 'UA-EET', min, max, gbarplot);
+        }
 
         let test = [
             { group: "banana", Nitrogen: "12", normal: "1", stress: "13" },
@@ -132,7 +186,7 @@
             h: 550,
             levels: 5,
             roundStrokes: true,
-            color: d3.scaleOrdinal().range(["#AFC52F", "#ff6600", "#3258a8", "#db2121", "#fffb26", "#5c350b" , "#c10ec4", "#0ec4af"]),
+            color: d3.scaleOrdinal().range(["#AFC52F", "#ff6600", "#3258a8", "#db2121", "#fffb26", "#5c350b", "#c10ec4", "#0ec4af"]),
             format: '.0f',
             legend: { title: 'Cursos', translateX: -35, translateY: -300 },
             unit: ''
@@ -168,7 +222,7 @@
 
         data.get_range_years('./files_list.csv', data, cordDiagram, colors, plot);
 
-        data.preferencias_opcoes('./files_list.csv', 2016,  radarChart, radarChartOptions)
+        data.preferencias_opcoes('./files_list.csv', 2016, radarChart, radarChartOptions)
 
         //cordDiagram.create_plot(matrix, NameProvider, colors)
 
@@ -183,5 +237,5 @@
     </script>
 
 </body>
-</html>
 
+</html>
