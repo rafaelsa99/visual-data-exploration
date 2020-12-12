@@ -16,7 +16,7 @@ class GroupedBarPlot {
                 "translate(" + this.margin.left + "," + this.margin.top + ")");
     }
 
-    clean_plot(){
+    clean_plot() {
         var _this = this;
         var div_id = _this.div_id;
         d3.select(div_id).select("svg").remove();
@@ -95,7 +95,7 @@ class GroupedBarPlot {
         })
     }
 
-    create_plot = (data, label_x_axis, y_axis_domain) => {
+    create_plot = (data, label_x_axis, y_axis_domain, label_y_axis) => {
 
         var _this = this;
 
@@ -121,12 +121,33 @@ class GroupedBarPlot {
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(x).tickSize(0));
 
+        // text label for the x axis
+        svg.append("text")
+            .attr("transform",
+                "translate(" + (width / 2) + " ," +
+                (height + margin.top + 20) + ")")
+            .style("text-anchor", "middle")
+            .style("font-size", "15px")
+            .style("position", "absolute")
+            .text(capitalize(String(label_x_axis)));
+
         // Add Y axis
         var y = d3.scaleLinear()
             .domain(y_axis_domain)
             .range([height, 0]);
         svg.append("g")
             .call(d3.axisLeft(y));
+
+        // text label for the y axis
+        svg.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0 - margin.left)
+            .attr("x", 0 - (height / 2))
+            .attr("dy", "1em")
+            .style("text-anchor", "middle")
+            .style("font-size", "15px")
+            .style("position", "absolute")
+            .text(capitalize(String(label_y_axis)));
 
         // Another scale for subgroup position?
         var xSubgroup = d3.scaleBand()
@@ -167,7 +188,7 @@ class GroupedBarPlot {
                 else
                     return height - y(d.value);
             })
-            .attr("fill", function (d) { return color(d.key); })
+            .attr("fill", (d, i) => color(i))
             .on("mouseover", function (d) { showTooltip(d); })
             .on("mouseout", function (d) { hideTooltip(d); });
 
@@ -209,7 +230,7 @@ class GroupedBarPlot {
                 .y(function (d) { return y(d.med) })
             );
 
-        // Add a label at the end of each line
+        // Add a label at the end of line
         svg
             .selectAll("myLabels")
             .data([1])
@@ -223,12 +244,13 @@ class GroupedBarPlot {
             .text("Mean")
             .style("fill", "#520f0f")
             .style("font-size", 20)
+            .style("font-weight", "bold")
             .on("click", function (d) {
                 // is the element currently visible ?
                 var currentOpacity = d3.selectAll(".averageLine").style("opacity")
                 // Change the opacity: from 0 to 1 or from 1 to 0
                 d3.selectAll(".averageLine").transition().style("opacity", currentOpacity == 1 ? 0 : 1)
-
+                d3.select(this).style("font-weight", currentOpacity == 1 ? "normal" : "bold")
             })
 
         let legend = svg.append("g")
@@ -239,7 +261,7 @@ class GroupedBarPlot {
             .attr('transform', `translate(${400},${30})`);
         // Create rectangles markers
         legend.selectAll('rect')
-            .data(data)
+            .data(subgroups)
             .enter()
             .append("rect")
             .attr("x", width / 2 - 65)
@@ -256,14 +278,17 @@ class GroupedBarPlot {
             .attr("y", (d, i) => i * 20 + 9)
             //.attr("font-size", "11px")
             .attr("fill", "#737373")
+            //.attr('text-decoration', "underline")
             .text((d) => (d.key).replace("Ano", ""))
             //.style("fill", (d,i) => cfg.color(i))
             .style("font-size", 15)
+            .style("font-weight", "bold")
             .on("click", function (d) {
                 // is the element currently visible ?
                 var currentOpacity = d3.selectAll("." + d.key).style("opacity")
                 // Change the opacity: from 0 to 1 or from 1 to 0
                 d3.selectAll("." + d.key).transition().style("opacity", currentOpacity == 1 ? 0 : 1).style("display", currentOpacity == 1 ? "none" : "block")
+                d3.select(this).style("font-weight", currentOpacity == 1 ? "normal" : "bold")
 
             })
 
@@ -295,6 +320,11 @@ class GroupedBarPlot {
         var hideTooltip = (d) => {
             tooltip
                 .style("opacity", 0)
+        }
+
+        function capitalize(s) {
+            if (typeof s !== 'string') return ''
+            return s.charAt(0).toUpperCase() + s.slice(1)
         }
 
     }

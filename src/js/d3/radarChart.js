@@ -695,12 +695,13 @@ class RadarChart {
                 .text(d => d)
                 //.style("fill", (d,i) => cfg.color(i))
                 .style("font-size", 15)
+                .style("font-weight", "bold")
                 .on("click", function (d) {
                     // is the element currently visible ?
                     var currentOpacity = d3.selectAll("." + d).style("opacity")
                     // Change the opacity: from 0 to 1 or from 1 to 0
                     d3.selectAll("." + d).transition().style("opacity", currentOpacity == 1 ? 0 : 1).style("display", currentOpacity == 1 ? "none" : "block")
-
+                    d3.select(this).style("font-weight", currentOpacity == 1 ? "normal": "bold")
                 })
         }
 

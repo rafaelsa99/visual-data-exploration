@@ -1,7 +1,7 @@
 class LinePlot {
     constructor(div_id) {
         // set the dimensions and margins of the graph
-        this.margin = { top: 10, right: 100, bottom: 30, left: 50 };
+        this.margin = { top: 10, right: 100, bottom: 40, left: 50 };
         this.width = 1000 - this.margin.left - this.margin.right;
         this.height = 800 - this.margin.top - this.margin.bottom;
         this.div_id = div_id;
@@ -132,7 +132,7 @@ class LinePlot {
         })
     }
 
-    create_plot = (data, columns, label_x_axis, y_axis_domain) => {
+    create_plot = (data, columns, label_x_axis, y_axis_domain, label_y_axis) => {
 
         var _this = this;
 
@@ -176,12 +176,34 @@ class LinePlot {
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(x).tickFormat(d3.format("d")));
 
+        // text label for the x axis
+        svg.append("text")
+            .attr("transform",
+                "translate(" + (width / 2) + " ," +
+                (height + margin.top + 20) + ")")
+            .style("text-anchor", "middle")
+            .style("font-size", "15px")
+            .style("position", "absolute")
+            .text(capitalize(String(label_x_axis)));
+
         // Add Y axis
         var y = d3.scaleLinear()
             .domain(y_axis_domain)
             .range([height, 0]);
         svg.append("g")
             .call(d3.axisLeft(y));
+
+        // text label for the y axis
+        svg.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0 - margin.left)
+            .attr("x", 0 - (height / 2))
+            .attr("dy", "1em")
+            .style("text-anchor", "middle")
+            .style("font-size", "15px")
+            .style("position", "absolute")
+            .text(capitalize(String(label_y_axis)));
+
 
         // Add the lines
         var line = d3.line()
@@ -196,6 +218,14 @@ class LinePlot {
             .attr("stroke", function (d) { return myColor(d.name) })
             .style("stroke-width", 4)
             .style("fill", "none")
+            .on("mouseover", function (d, i) {
+                //showTooltip(d);
+                // Change the opacity: from 0 to 1 or from 1 to 0
+                d3.selectAll("path." + d.name).transition().style("stroke-width", 8).attr("stroke", myColor(d.name));
+            })
+            .on("mouseout", function (d, i) { //hideTooltip(d);
+                d3.selectAll("path." + d.name).transition().style("stroke-width", 4);
+            });
 
         // Add the points
         svg
@@ -208,20 +238,28 @@ class LinePlot {
             .attr("class", function (d) { return d.name })
             // Second we need to enter in the 'values' part of this group
             .selectAll("myPoints")
-            .data(function (d) { 
+            .data(function (d) {
                 d.values.forEach(element => {
                     element["name"] = d.name
                 });
-                return d.values 
+                return d.values
             })
             .enter()
             .append("circle")
             .attr("cx", function (d) { return x(d.h_axis) })
             .attr("cy", function (d) { return y(d.value) })
+            .attr("class", function (d, i) { return i + d.name })
             .attr("r", 5)
             .attr("stroke", "white")
-            .on("mouseover", function (d) { showTooltip(d); })
-            .on("mouseout", function (d) { hideTooltip(d); });
+            .on("mouseover", function (d, i) {
+                showTooltip(d);
+                // Change the opacity: from 0 to 1 or from 1 to 0
+                d3.selectAll("path." + d.name).transition().style("stroke-width", 8).attr("stroke", myColor(d.name));
+            })
+            .on("mouseout", function (d, i) {
+                hideTooltip(d);
+                d3.selectAll("path." + d.name).transition().style("stroke-width", 4);
+            });
 
         // Add a label at the end of each line
         svg
@@ -247,14 +285,18 @@ class LinePlot {
             .append("text")
             .attr('x', function (d, i) { return 30 + i * 90 })
             .attr('y', 30)
+            //.attr('text-decoration', "underline")
+            //.attr('text-decoration-color', "red!important")
             .text(function (d) { return d.name; })
             .style("fill", function (d) { return myColor(d.name) })
             .style("font-size", 15)
+            .style("font-weight", "bold")
             .on("click", function (d) {
                 // is the element currently visible ?
                 var currentOpacity = d3.selectAll("." + d.name).style("opacity")
                 // Change the opacity: from 0 to 1 or from 1 to 0
                 d3.selectAll("." + d.name).transition().style("opacity", currentOpacity == 1 ? 0 : 1)
+                d3.select(this).style("font-weight", currentOpacity == 1 ? "normal" : "bold")
 
             })
 
@@ -276,6 +318,7 @@ class LinePlot {
         var showTooltip = (d) => {
             tooltip
                 .style("opacity", 1)
+                .style("display", "block")
                 .html("Value: " + d.value.toFixed(2) + "<br>" + d.name)
                 .style("left", (d3.event.pageX + 16) + "px")
                 .style("top", (d3.event.pageY + 16) + "px");
@@ -285,6 +328,12 @@ class LinePlot {
         var hideTooltip = (d) => {
             tooltip
                 .style("opacity", 0)
+                .style("display", "none")
+        }
+
+        function capitalize(s) {
+            if (typeof s !== 'string') return ''
+            return s.charAt(0).toUpperCase() + s.slice(1)
         }
     }
 }

@@ -215,10 +215,11 @@ class CordDiagram {
         // A function that change this tooltip when the user hover a point.
         // Its opacity is set to 1: we can now see it. Plus it set the text and position of tooltip depending on the datapoint (d)
         var showTooltip = (d) => {
+            console.log(d)
             tooltip
                 .style("opacity", 1)
                 //.html(nameProvider[d.source.index] + " <-> " + nameProvider[d.target.index])
-                .html("Course 1: " + nameProvider[d.source.index] + "<br>Course 2: " + nameProvider[d.target.index])
+                .html(nameProvider[d.source.index] +  " &#8594; " + nameProvider[d.target.index] + ": " + (d.source.value).toFixed(2) + "%" + "<br>" + nameProvider[d.target.index] + " &#8594; " + nameProvider[d.source.index] + ": " + (d.target.value).toFixed(2) + "%")
                 .style("left", (d3.event.pageX + 16) + "px")
                 .style("top", (d3.event.pageY + 16) + "px");
         }
