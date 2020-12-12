@@ -23,8 +23,17 @@
 
     <div id="lineplotOpcoes"></div>
 
+    <h2>Course</h2>
+    <label for="course">Choose a course:</label>
+    <select id="course">
+    </select>
     <div id="grouped_bar_plot"></div>
 
+    <h2>Year</h2>
+    <div id="slider_container">
+        <input type="range" id="sliderRadar"/>
+        <p id="labelRadar"> </p>
+    </div>
     <div>
         <div id="radar_chart"></div>
         <input name="updateButton" type="button" value="See Evolution" id="viewAnimation" />
@@ -32,8 +41,8 @@
 
     <h2>Year</h2>
     <div id="slider_container">
-        <input type="range" id="slider"/>
-        <p id="label"> </p>
+        <input type="range" id="sliderChord"/>
+        <p id="labelChord"> </p>
     </div>
     <br>
     <h2>Options</h2>
@@ -91,8 +100,13 @@
         var gbarplot = new GroupedBarPlot('#grouped_bar_plot');
         var radarChart = new RadarChart('#radar_chart');
         var cordDiagram = new CordDiagram('#cord_diagram');
-
+        data.set_course_selection('./files_list.csv', '#course');
         data.notas_colocados('./files_list.csv', 'UA-EET', 2007, 2016, gbarplot.create_plot);
+        d3.select('#course')
+            .on('change', function() {
+                gbarplot.cleanPlot();
+                data.notas_colocados('./files_list.csv', this.value, 2007, 2016, gbarplot.create_plot);
+        });
 
         let test = [
             { group: "banana", Nitrogen: "12", normal: "1", stress: "13" },
@@ -162,13 +176,16 @@
         //gbarplot.create_plot(test,["group"])
         //radarChart.create_plot(dataaa, radarChartOptions)
 
-        var plot = new Plot('#slider', '#label', '#option');
+        var plotChordDiagram = new Plot('#sliderChord', '#labelChord', '#option');
+        var plotRadarChart = new Plot('#sliderRadar', '#labelRadar');
 
         //plot.plot_alternativas_candidatos('./files_list.csv', data, radarChart, radarChartOptions)
 
-        data.get_range_years('./files_list.csv', data, cordDiagram, colors, plot);
+        data.plot_alternativas_candidatos('./files_list.csv', data, cordDiagram, colors, plotChordDiagram);
 
-        data.preferencias_opcoes('./files_list.csv', 2016,  radarChart, radarChartOptions)
+        data.plot_preferencias_opcoes('./files_list.csv', data, radarChart, radarChartOptions, plotRadarChart);
+
+        //data.preferencias_opcoes('./files_list.csv', 2016,  radarChart, radarChartOptions)
 
         //cordDiagram.create_plot(matrix, NameProvider, colors)
 
@@ -177,6 +194,8 @@
             radarChart.clean_plot();
             setTimeout(function () {
                 data.preferencias_opcoes('./files_list.csv', element, radarChart, radarChartOptions);
+                d3.select("#sliderRadar").property("value",element);
+                d3.select("#labelRadar").text(element);
             }, 250)
             // Get the data again
         }

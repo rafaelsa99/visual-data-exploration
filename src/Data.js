@@ -6,7 +6,7 @@ class Data{
         let listCourses = new Set()
         let count = 1;
         let totalFiles = 0;
-
+        var axis_max = 0;
         const append_data = (obj, min_grade, pos) => {
             append_course(obj.course)
             var i;
@@ -20,8 +20,11 @@ class Data{
                 append_years(obj.year, i)
             }
             grades_courses.get(i).set(obj.course, String(min_grade));
+            if(axis_max < min_grade){
+                axis_max = min_grade
+            }
             if (pos == totalFiles) {
-                plot(get_JSON_Format(grades_courses), Array.from(listCourses),['year'],[100,200])
+                plot(get_JSON_Format(grades_courses), Array.from(listCourses),['year'],[100,axis_max + 5])
             }  
         }
 
@@ -79,6 +82,7 @@ class Data{
                             var grade = parseFloat(data.NotaCandidaturaCurso.replace(",", "."))
                             if(data.ColocCursoCodigo == element.cod_course && data.ColocInstituicaoCodigo == element.cod_institution && grade < min_grade){
                                 min_grade = grade; 
+
                             }
                             });
                         append_data(element, min_grade, count)
@@ -94,7 +98,7 @@ class Data{
         var countOptions = new Map()
         let totalFiles = 0;
         let count = 1;
-
+        let axis_max = 0;
         const append_data = (obj, options, pos) => {
             var i = countOptions.size
             var year = new Map()
@@ -110,8 +114,21 @@ class Data{
             countOptions.get(i).set("Opção4", String((options.opt4/sum) * 100));
             countOptions.get(i).set("Opção5", String((options.opt5/sum) * 100));
             countOptions.get(i).set("Opção6", String((options.opt6/sum) * 100));
+            if(((options.opt1/sum) * 100) > axis_max){
+                axis_max = ((options.opt1/sum) * 100);
+            } if(((options.opt2/sum) * 100) > axis_max){
+                axis_max = ((options.opt2/sum) * 100);
+            } if(((options.opt3/sum) * 100) > axis_max){
+                axis_max = ((options.opt3/sum) * 100);
+            } if(((options.opt4/sum) * 100) > axis_max){
+                axis_max = ((options.opt4/sum) * 100);
+            } if(((options.opt5/sum) * 100) > axis_max){
+                axis_max = ((options.opt5/sum) * 100);
+            } if(((options.opt6/sum) * 100) > axis_max){
+                axis_max = ((options.opt6/sum) * 100);
+            }
             if (pos == totalFiles) {
-                plot(get_JSON_Format(countOptions), ['Opção1', 'Opção2', 'Opção3', 'Opção4', 'Opção5', 'Opção6'],['year'],[0,40])
+                plot(get_JSON_Format(countOptions), ['Opção1', 'Opção2', 'Opção3', 'Opção4', 'Opção5', 'Opção6'],['year'],[0,axis_max + 3])
             }
         }
 
@@ -186,7 +203,7 @@ class Data{
         var grade = new Map()
         let totalFiles = 0;
         let count = 1;
-
+        var axis_max = 0;
         const append_data = (obj, count_grades, pos) => {
             for (const [key, value] of count_grades.entries()) {
                 var i;
@@ -200,9 +217,12 @@ class Data{
                     append_grade(key, i)
                 }
                 grades.get(i).set(String("Ano" + obj.year), String(value));
+                if(value > axis_max){
+                    axis_max = value;
+                }
             }
             if (pos == totalFiles) {
-                plot(get_JSON_Format(grades),['grade'])
+                plot(get_JSON_Format(grades),['grade'], [0, axis_max+3])
             }
         }
 
@@ -596,6 +616,7 @@ class Data{
                 optionsCourse.get(i).set(key, value);
             }
             if (pos == totalFiles) {
+                plot.cleanPlotWithoutSmoothness();
                 plot.create_plot(get_JSON_Format(optionsCourse), plotOptions)
             }  
         }
@@ -747,8 +768,8 @@ class Data{
         })
     }
 
-    get_range_years(files_list, dataClass, chart, chartOptions, plot, course = "all"){
-        var min_year, max_year, isFirst = true, count = 0;
+    plot_alternativas_candidatos(files_list, dataClass, chart, chartOptions, plot, course = "all"){
+        var min_year, max_year, isFirst = true;
         d3.csv(files_list, function(data){
             data.forEach(element => {
                 if(course == "all" || element.course == course){
@@ -770,6 +791,42 @@ class Data{
         });
     }
 
+    plot_preferencias_opcoes(files_list, dataClass, chart, chartOptions, plot, course = "all"){
+        var min_year, max_year, isFirst = true;
+        d3.csv(files_list, function(data){
+            data.forEach(element => {
+                if(course == "all" || element.course == course){
+                    if(isFirst){
+                        min_year = element.year;
+                        max_year = element.year;
+                        isFirst = false;
+                    } else{
+                        if(element.year > max_year){
+                            max_year = element.year;
+                        }
+                        if(element.year < min_year){
+                            min_year = element.year;
+                        }
+                    }
+                }
+            })
+            plot.plot_preferencias_opcoes('./files_list.csv', dataClass, chart, chartOptions, min_year, max_year)
+        });
+    }
+
+    set_course_selection(files_list, select_id){
+        d3.csv(files_list, function(data){
+            var courses = new Set();
+            data.forEach(element => {
+                courses.add(element.course);
+            })
+            for(var c of courses){
+                d3.select(select_id).append("option")
+                    .text(c)
+                    .attr('value',c);
+            }
+        });
+    }
 }
 
 export default Data;

@@ -36,6 +36,25 @@ class Plot{
                 updateOnSlider(this.value);
             });
     }
+
+    plot_preferencias_opcoes(files_list, data, plot, plotOptions, minYear, maxYear){
+        let slider = d3.select(this.input_id);
+        let label = d3.select(this.label_id);  
+        label.text(maxYear);
+        data.preferencias_opcoes(files_list, maxYear, plot, plotOptions)
+
+        slider
+            .attr("min", minYear)
+            .attr("max", maxYear)
+            .attr("value", maxYear)
+            .attr("step", 1)
+            .on("input", function(d) {
+                label.text(this.value);
+                //plot.cleanPlotWithoutSmoothness();
+                //radarChart.clean_plot();
+                data.preferencias_opcoes(files_list, this.value, plot, plotOptions);
+            });
+    }
     
 }
 

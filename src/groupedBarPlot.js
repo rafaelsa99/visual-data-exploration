@@ -16,6 +16,28 @@ class GroupedBarPlot {
                 "translate(" + this.margin.left + "," + this.margin.top + ")");
     }
 
+    cleanPlot(){
+        var _this = this;
+        var margin = _this.margin;
+        var width = _this.width;
+        var height = _this.height;
+        var div_id = _this.div_id;
+        var svg = _this.svg;
+        //Remove whatever chart with the same id/class was present before
+        //svg.selectAll(".radarArea").remove();
+        //svg.selectAll(".radarStroke").remove();
+        //svg.selectAll(".radarCircleWrapper").remove();
+        //svg.selectAll(".radarCircle").remove();
+        d3.select(div_id).select("svg").remove();
+        // append the svg object to the body of the page
+        _this.svg = d3.select(div_id)
+            .append("svg")
+            .attr("width", this.width + this.margin.left + this.margin.right)
+            .attr("height", this.height + this.margin.top + this.margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+    }
+
     create_plot_csv = (csv_file, label_x_axis) => {
 
         var _this = this;
@@ -81,7 +103,7 @@ class GroupedBarPlot {
         })
     }
 
-    create_plot = (data, label_x_axis) => {
+    create_plot = (data, label_x_axis, y_axis_domain) => {
 
         var _this = this;
 
@@ -109,7 +131,7 @@ class GroupedBarPlot {
 
         // Add Y axis
         var y = d3.scaleLinear()
-            .domain([0, 40])
+            .domain(y_axis_domain)
             .range([height, 0]);
         svg.append("g")
             .call(d3.axisLeft(y));
