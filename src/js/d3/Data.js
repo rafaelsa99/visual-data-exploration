@@ -25,7 +25,7 @@ class Data{
             }
             if (pos == totalFiles) {
                 plot.cleanPlot();
-                plot.create_plot(get_JSON_Format(grades_courses), Array.from(listCourses),['year'],[100,axis_max + 5])
+                plot.create_plot(get_JSON_Format(grades_courses), Array.from(listCourses),['year'],[100,axis_max + 5], "Mark of the Last Person Placed")
             }  
         }
 
@@ -130,7 +130,7 @@ class Data{
             }
             if (pos == totalFiles) {
                 plot.cleanPlot();
-                plot.create_plot(get_JSON_Format(countOptions), ['Opção1', 'Opção2', 'Opção3', 'Opção4', 'Opção5', 'Opção6'],['year'],[0,axis_max + 3])
+                plot.create_plot(get_JSON_Format(countOptions), ['Opção1', 'Opção2', 'Opção3', 'Opção4', 'Opção5', 'Opção6'],['year'],[0,axis_max + 3],"Percentage of the Option Position")
             }
         }
 
@@ -225,7 +225,7 @@ class Data{
             }
             if (pos == totalFiles) {
                 plot.clean_plot()
-                plot.create_plot(get_JSON_Format(grades),['grade'],[0, axis_max])
+                plot.create_plot(get_JSON_Format(grades),['grade'],[0, axis_max],"Number of Students Placed")
             }
         }
 
