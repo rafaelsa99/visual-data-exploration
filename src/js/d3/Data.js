@@ -109,12 +109,12 @@ class Data{
                 sum += options[j];
             }
             countOptions.set(i, year);
-            countOptions.get(i).set("Opção1", String((options.opt1/sum) * 100));
-            countOptions.get(i).set("Opção2", String((options.opt2/sum) * 100));
-            countOptions.get(i).set("Opção3", String((options.opt3/sum) * 100));
-            countOptions.get(i).set("Opção4", String((options.opt4/sum) * 100));
-            countOptions.get(i).set("Opção5", String((options.opt5/sum) * 100));
-            countOptions.get(i).set("Opção6", String((options.opt6/sum) * 100));
+            countOptions.get(i).set("Option1", String((options.opt1/sum) * 100));
+            countOptions.get(i).set("Option2", String((options.opt2/sum) * 100));
+            countOptions.get(i).set("Option3", String((options.opt3/sum) * 100));
+            countOptions.get(i).set("Option4", String((options.opt4/sum) * 100));
+            countOptions.get(i).set("Option5", String((options.opt5/sum) * 100));
+            countOptions.get(i).set("Option6", String((options.opt6/sum) * 100));
             if(((options.opt1/sum) * 100) > axis_max){
                 axis_max = ((options.opt1/sum) * 100);
             } if(((options.opt2/sum) * 100) > axis_max){
@@ -130,7 +130,7 @@ class Data{
             }
             if (pos == totalFiles) {
                 plot.cleanPlot();
-                plot.create_plot(get_JSON_Format(countOptions), ['Opção1', 'Opção2', 'Opção3', 'Opção4', 'Opção5', 'Opção6'],['year'],[0,axis_max + 3],"Percentage of the Option Position")
+                plot.create_plot(get_JSON_Format(countOptions), ['Option1', 'Option2', 'Option3', 'Option4', 'Option5', 'Option6'],['year'],[0,axis_max + 3],"Percentage of the Option Position")
             }
         }
 
@@ -714,7 +714,7 @@ class Data{
                         var option;
                         data_file.forEach(data => {
                             if(is_relevant_course(data.Opcao1CursoCodigo,data.Opcao1InstituicaoCodigo) && is_same_course(data.Opcao1CursoCodigo,data.Opcao1InstituicaoCodigo,element.cod_course, element.cod_institution)){
-                                option = "Opção1";
+                                option = "Option1";
                                 if(opcoes.has(option)){
                                     opcoes.set(option, opcoes.get(option) + 1)
                                 } else {
@@ -722,7 +722,7 @@ class Data{
                                 }
                             }
                             if(is_relevant_course(data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo) && is_same_course(data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo,element.cod_course, element.cod_institution)){
-                                option = "Opção2";
+                                option = "Option2";
                                 if(opcoes.has(option)){
                                     opcoes.set(option, opcoes.get(option) + 1)
                                 } else {
@@ -730,7 +730,7 @@ class Data{
                                 }
                             }
                             if(is_relevant_course(data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo) && is_same_course(data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo,element.cod_course, element.cod_institution)){
-                                option = "Opção3";
+                                option = "Option3";
                                 if(opcoes.has(option)){
                                     opcoes.set(option, opcoes.get(option) + 1)
                                 } else {
@@ -738,7 +738,7 @@ class Data{
                                 }
                             }
                             if(is_relevant_course(data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo) && is_same_course(data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo,element.cod_course, element.cod_institution)){
-                                option = "Opção4";
+                                option = "Option4";
                                 if(opcoes.has(option)){
                                     opcoes.set(option, opcoes.get(option) + 1)
                                 } else {
@@ -746,7 +746,7 @@ class Data{
                                 }
                             }
                             if(is_relevant_course(data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo) && is_same_course(data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo,element.cod_course, element.cod_institution)){
-                                option = "Opção5";
+                                option = "Option5";
                                 if(opcoes.has(option)){
                                     opcoes.set(option, opcoes.get(option) + 1)
                                 } else {
@@ -754,7 +754,7 @@ class Data{
                                 }
                             }
                             if(is_relevant_course(data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo) && is_same_course(data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo,element.cod_course, element.cod_institution)){
-                                option = "Opção6";
+                                option = "Option6";
                                 if(opcoes.has(option)){
                                     opcoes.set(option, opcoes.get(option) + 1)
                                 } else {
