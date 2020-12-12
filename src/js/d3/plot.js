@@ -92,7 +92,6 @@ class Plot {
             sliderRange
                 .value()
                 .map(d3v6.format(''))
-                .join('-')
         );
     }
 
@@ -134,7 +133,6 @@ class Plot {
             sliderRange
                 .value()
                 .map(d3v6.format(''))
-                .join('-')
         );
     }
 
@@ -150,6 +148,7 @@ class Plot {
             };
             let rangeYears = []
             let rangeVal = d3v6.select('p#value-range')._groups[0][0].innerHTML.split(",")
+            console.log(rangeVal)
             for(var i = parseInt(rangeVal[0]); i <= parseInt(rangeVal[1]); i++){
                 rangeYears.push(i)
             }
@@ -185,7 +184,6 @@ class Plot {
             sliderRange
                 .value()
                 .map(d3v6.format(''))
-                .join('-')
         );
 
         // ** Update data section (Called from the onclick)
@@ -236,7 +234,6 @@ class Plot {
             sliderRange
                 .value()
                 .map(d3v6.format(''))
-                .join('-')
         );
     }
 }
