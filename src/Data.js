@@ -828,6 +828,22 @@ class Data{
             }
         });
     }
+
+    plot_notas_colocados(files_list, dataClass, chart, plot, course){
+        var yearsSet = new Set();
+        d3.csv(files_list, function(data){
+            data.forEach(element => {
+                if(element.course == course){
+                    yearsSet.add(element.year);
+                }
+            })
+            var years = []
+            for(var y of yearsSet){
+                years.push(parseInt(y));
+            }
+            plot.plot_notas_colocados('./files_list.csv', dataClass, chart, years, course);
+        });
+    }
 }
 
 export default Data;

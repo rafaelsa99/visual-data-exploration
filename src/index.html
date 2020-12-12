@@ -99,40 +99,6 @@
             rangeYears.forEach(delayLoop(updateData, 3000));
         };
 
-        // Range
-        var data = [2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016];
-        var sliderRange = d3v6
-            .sliderBottom()
-            .min(d3v6.min(data))
-            .max(d3v6.max(data))
-            .step(1)
-            .width(300)
-            .ticks(6)
-            .default([data[0],data[data.length-1]])
-            .fill('#2196f3')
-            .on('onchange', val => {
-                d3v6.select('p#value-range').text(val.map(d3v6.format('')));
-                let rangeVal = d3v6.select('p#value-range')._groups[0][0].innerHTML.split(",")
-                call_BarPlot(rangeVal[0], rangeVal[1])
-            });
-
-        var gRange = d3v6
-            .select('div#slider-range')
-            .append('svg')
-            .attr('width', 500)
-            .attr('height', 100)
-            .append('g')
-            .attr('transform', 'translate(30,30)');
-
-        gRange.call(sliderRange);
-
-        d3v6.select('p#value-range').text(
-            sliderRange
-                .value()
-                .map(d3v6.format(''))
-                .join('-')
-        );
-
         import Data from './Data.js';
         import LinePlot from './linePlot.js';
         import GroupedBarPlot from './groupedBarPlot.js';
@@ -150,17 +116,19 @@
         var gbarplot = new GroupedBarPlot('#grouped_bar_plot');
         var radarChart = new RadarChart('#radar_chart');
         var cordDiagram = new CordDiagram('#cord_diagram');
+
+        var plotBarChart = new Plot('div#slider-range', 'p#value-range');
+
         data.set_course_selection('./files_list.csv', '#course');
-        data.notas_colocados('./files_list.csv', 'UA-EET', 2007, 2016, gbarplot);
+        //data.notas_colocados('./files_list.csv', 'UA-EET', 2007, 2016, gbarplot);
+        data.plot_notas_colocados('./files_list.csv', data, gbarplot, plotBarChart, 'UA-EET');
+
         d3.select('#course')
             .on('change', function() {
-                data.notas_colocados('./files_list.csv', this.value, 2007, 2016, gbarplot);
+                d3.select('div#slider-range').select("svg").remove();
+                data.plot_notas_colocados('./files_list.csv', data, gbarplot, plotBarChart, this.value);
         });
             
-
-        let call_BarPlot = (min, max) => {
-            data.notas_colocados('./files_list.csv', 'UA-EET', min, max, gbarplot);
-        }
 
         let test = [
             { group: "banana", Nitrogen: "12", normal: "1", stress: "13" },
