@@ -10,6 +10,10 @@
 
   <link href="img/favicon.ico" rel="shortcut icon" />
 
+  <!-- Google fonts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Oswald:400,300,700" rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i&display=swap"
     rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,900&display=swap" rel="stylesheet">
@@ -18,6 +22,17 @@
   <link rel="stylesheet" href="css/font-awesome.min.css" />
   <link rel="stylesheet" href="css/magnific-popup.css" />
   <link rel="stylesheet" href="css/owl.carousel.min.css" />
+
+  <link rel="stylesheet" href="css/styleCord.css">
+
+  <!-- Load d3.js -->
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script src="https://unpkg.com/d3-simple-slider"></script>
+  <script>
+    d3v6 = d3
+    window.d3 = null
+  </script>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
 
   <link rel="stylesheet" href="css/style.css" />
   <!--[if lt IE 9]>
@@ -37,7 +52,7 @@
       <div class="close-menu">x</div>
 
       <ul class="site-menu">
-        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="index.html">Home</a></li>
         <li><a href="lineplot1.html">Line Plot 1</a></li>
         <li><a href="lineplot2.html">Line Plot 2</a></li>
         <li><a href="barchart.html">Grouped Bar Chart</a></li>
@@ -71,42 +86,20 @@
           <ul class="contact-info">
             <li>1525 Boring Lane, Los Angeles, CA</li>
             <li>+34 56672 9984 22</li>
-            <li><a href="/cdn-cgi/l/email-protection#98fbf7f6ecf9fbecf5fdd8f5e1fdf5f9f1f4b6fbf7f5"><span
+            <li><a href="/cdn-cgi/l/email-protection#e1828e8f958082958c84a18c98848c80888dcf828e8c"><span
                   class="__cf_email__"
-                  data-cfemail="9bf8f4f5effaf8eff6fedbf6e2fef6faf2f7b5f8f4f6">[email&#160;protected]</span></a></li>
+                  data-cfemail="99faf6f7edf8faedf4fcd9f4e0fcf4f8f0f5b7faf6f4">[email&#160;protected]</span></a></li>
           </ul>
           <a href="#" class="site-btn">see my portfolio <img src="img/arrow-right.png" alt=""></a>
         </div>
       </div>
 
 
-      <div class="page-section">
-        <div class="hero-section">
-          <div class="hero-scroll">
-            <div class="hero-track">
-              <div class="hs-item set-bg" data-setbg="img/hero/1.jpg">
-                <div class="hs-info">
-                  <h5>Ice Cold Love</h5>
-                  <p>Nature Photoagraphy</p>
-                  <a href="#"><img src="img/arrow-right.png" alt=""></a>
-                </div>
-              </div>
-              <div class="hs-item set-bg" data-setbg="img/hero/2.jpg">
-                <div class="hs-info">
-                  <h5>Bold Architecture</h5>
-                  <p>Cityscape Photography</p>
-                  <a href="#"><img src="img/arrow-right.png" alt=""></a>
-                </div>
-              </div>
-              <div class="hs-item set-bg" data-setbg="img/hero/1.jpg">
-                <div class="hs-info">
-                  <h5>Ice Cold Love</h5>
-                  <p>Nature Photoagraphy</p>
-                  <a href="#"><img src="img/arrow-right.png" alt=""></a>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="page-section about-page">
+        <div class="about-section">
+          <!-- Create a div where the graph will take place -->
+
+          <div id="lineplotOpcoes"></div>
         </div>
       </div>
 
@@ -114,7 +107,6 @@
     <div class="copyright">
       <p>
         Copyright &copy;
-        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
         <script>document.write(new Date().getFullYear());</script> All rights reserved
       </p>
     </div>
@@ -137,8 +129,20 @@
 
     gtag('config', 'UA-23581568-13');
   </script>
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
-    data-cf-beacon='{"rayId":"5ffb2c549f08bbfa","version":"2020.11.6","si":10}'></script>
+
+
+  <!-- Color Scale -->
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+  <script type="module">
+    import Data from './js/d3/Data.js';
+    import LinePlot from './js/d3/linePlot.js';
+    var data = new Data();
+
+    var lineplotOpcoes = new LinePlot('#lineplotOpcoes');
+    data.percentagem_posicao_curso('./files_list.csv', 'UA-EET', 2007, 2016, lineplotOpcoes.create_plot);
+  </script>
+
 </body>
 
 </html>
