@@ -37,11 +37,17 @@ class Plot {
             });
     }
 
-    plot_preferencias_opcoes(files_list, data, plot, plotOptions, minYear, maxYear) {
+    plot_preferencias_opcoes(files_list, data, plot, plotOptions, minYear, maxYear, course) {
         let slider = d3.select(this.input_id);
         let label = d3.select(this.label_id);
         label.text(maxYear);
-        data.preferencias_opcoes(files_list, maxYear, plot, plotOptions)
+
+        if (course == "all") {
+            data.preferencias_opcoesM(files_list, maxYear, plot, plotOptions)
+        }else{
+            data.preferencias_opcoes(files_list, maxYear, plot, plotOptions, course);
+        }
+        
 
         slider
             .attr("min", minYear)
@@ -50,7 +56,11 @@ class Plot {
             .attr("step", 1)
             .on("input", function (d) {
                 label.text(this.value);
-                data.preferencias_opcoes(files_list, this.value, plot, plotOptions);
+                if (course == "all") {
+                    data.preferencias_opcoesM(files_list, maxYear, plot, plotOptions)
+                }else{
+                    data.preferencias_opcoes(files_list, this.value, plot, plotOptions, course);
+                }
             });
     }
 

@@ -701,13 +701,14 @@ Hero section
 .hero-track {
 	padding-bottom: 50px;
 	overflow: hidden;
+	min-width: 900px;
 }
 
 .hs-item {
 	height: 750px;
 	float: left;
 	margin-right: 50px;
-	position: relative;
+	min-width: 900px;
 }
 
 .hs-item:last-child {
@@ -730,7 +731,6 @@ Hero section
 
 .nicescroll-rails.nicescroll-rails-hr,
 #ascrail2000-hr {
-	max-width: calc(100% - 717px);
 	overflow: hidden;
 }
 
