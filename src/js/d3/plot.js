@@ -57,7 +57,7 @@ class Plot {
             .on("input", function (d) {
                 label.text(this.value);
                 if (course == "all") {
-                    data.preferencias_opcoesM(files_list, maxYear, plot, plotOptions)
+                    data.preferencias_opcoesM(files_list, this.value, plot, plotOptions)
                 }else{
                     data.preferencias_opcoes(files_list, this.value, plot, plotOptions, course);
                 }
@@ -158,7 +158,6 @@ class Plot {
             };
             let rangeYears = []
             let rangeVal = d3v6.select('p#value-range')._groups[0][0].innerHTML.split(",")
-            console.log(rangeVal)
             for(var i = parseInt(rangeVal[0]); i <= parseInt(rangeVal[1]); i++){
                 rangeYears.push(i)
             }
@@ -199,7 +198,7 @@ class Plot {
         // ** Update data section (Called from the onclick)
         function updateData(element) {
             setTimeout(function () {
-                dataClass.preferencias_opcoes(files_list, element, chart, chartOptions);
+                dataClass.preferencias_opcoesM(files_list, element, chart, chartOptions);
                 d3.select("#sliderRadar").property("value", element);
                 d3.select("#labelRadar").text(element);
             }, 250)
