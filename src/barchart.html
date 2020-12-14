@@ -2,13 +2,13 @@
 <html lang="zxx">
 
 <head>
-  <title>VI - Alumni</title>
+  <title>Placed Students' Grades</title>
   <meta charset="UTF-8">
-  <meta name="description" content="VI, Alumni">
-  <meta name="keywords" content="industry, html">
+  <meta name="description" content="Placed Students' Grades">
+  <meta name="keywords" content="UA, DETI">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="img/favicon.ico" rel="shortcut icon" />
+  <link href="img/ua.ico" rel="icon" />
 
   <!-- Google fonts -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -53,16 +53,11 @@
 
       <ul class="site-menu">
         <li><a href="index.html">Home</a></li>
-        <li><a href="lineplot1.html">Line Plot 1</a></li>
-        <li><a href="lineplot2.html">Line Plot 2</a></li>
-        <li><a href="barchart.html">Grouped Bar Chart</a></li>
-        <li><a href="radarchart.html">Radar Chart</a></li>
-        <li><a href="radarchartmultiple.html">Multiple Radar Chart</a></li>
-        <li><a href="chorddiagram.html">Chord Diagram</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="elements.html">Elements</a></li>
+        <li><a href="lineplot1.html">Last Placed Students' Grades</a></li>
+        <li><a href="barchart.html">Placed Students' Grades</a></li>
+        <li><a href="lineplot2.html">Course Position in the Applications</a></li>
+        <li><a href="radarchart.html">Preferences Option - Course</a></li>
+        <li><a href="chorddiagram.html">Students' Alternatives</a></li>
       </ul>
     </div>
     <header class="header-section">
@@ -74,24 +69,48 @@
 
       <div class="main-sidebar">
         <div class="mb-warp">
-          <a href="index.html" class="site-logo">
-            <h2>Nissa</h2>
-            <p>Photography Studio</p>
-          </a>
           <div class="about-info">
-            <h2>My name is Michael Smith.</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus libero mauris, bibendum eget sapien ac,
-              ultrices rhoncus ipsum. Donec nec sapien in urna fermentum ornare. Morbi vel ultrices leo. Sed eu turpis
-              eu arcu vehicula fringilla ut vitae orci. Suspendisse maximus malesuada </p>
+            <h2>Placed Students' Grades</h2>
+            <h5>The visualization presents the time evolution of the application grades of the placed students in a
+              given course, as well as the distribution of the placed students among the several grades. <br>
+              The mean of the different years is presented for each grade, being represented by the line in the graphic.
+            </h5>
           </div>
-          <ul class="contact-info">
-            <li>1525 Boring Lane, Los Angeles, CA</li>
-            <li>+34 56672 9984 22</li>
-            <li><a href="/cdn-cgi/l/email-protection#e1828e8f958082958c84a18c98848c80888dcf828e8c"><span
-                  class="__cf_email__"
-                  data-cfemail="99faf6f7edf8faedf4fcd9f4e0fcf4f8f0f5b7faf6f4">[email&#160;protected]</span></a></li>
-          </ul>
-          <a href="#" class="site-btn">see my portfolio <img src="img/arrow-right.png" alt=""></a>
+          <div>
+            <div class="tab-element">
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1"
+                    aria-selected="true">Interactions</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2"
+                    aria-selected="false">Conclusions</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+
+                <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
+                  <h6>The interactions available on the visualization are:</h6><br>
+                  <p><b>Time range selection: </b>Through the slider it is possible to select a specific time range,
+                    within the available years, to present the information.</p>
+                  <p><b>Course selection: </b>Through the drop-down list it is possible to choose the course for which
+                    the information is to be seen.</p>
+                  <p><b>Data filtering: </b>By pressing the several lines of the caption, presented next to the graphic,
+                    it is possible to show/hide information regarding a year or the mean.The information visible in the
+                    graphic is represented with their caption in bold.</p>
+                  <p><b>Detailed information: </b>By moving the cursor to a bar of a specific grade, it is possible to
+                    see detailed information about the year and the number of placed students in that year with that
+                    grade.</p>
+                </div>
+                <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus libero mauris, biben-dum eget
+                    sapien ac, ultrices rhoncus ipsum. Donec nec sapien in urna fermentum ornare. Morbi vel ultrices
+                    leo. Sed eu turpis eu arcu vehicula fringilla ut vitae orci. Suspendisse maximus malesuada </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -128,8 +147,9 @@
     </div>
     <div class="copyright">
       <p>
-        Copyright &copy;
-        <script>document.write(new Date().getFullYear());</script> All rights reserved
+        Information Visualization - MEI &copy;
+        <script>document.write(new Date().getFullYear());</script>
+        Template by <a href="https://colorlib.com" target="_blank">Colorlib</a>
       </p>
     </div>
   </div>

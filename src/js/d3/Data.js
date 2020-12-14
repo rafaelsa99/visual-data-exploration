@@ -25,7 +25,7 @@ class Data{
             }
             if (pos == totalFiles) {
                 plot.cleanPlot();
-                plot.create_plot(get_JSON_Format(grades_courses), Array.from(listCourses),['year'],[100,axis_max + 5], "Mark of the Last Person Placed")
+                plot.create_plot(get_JSON_Format(grades_courses), Array.from(listCourses),['year'],[100,axis_max + 5], "Grade of the Last Student Placed")
             }  
         }
 
