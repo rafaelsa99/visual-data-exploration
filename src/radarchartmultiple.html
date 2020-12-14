@@ -34,7 +34,7 @@
   </script>
   <script src="https://d3js.org/d3.v4.min.js"></script>
 
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/styleM.css" />
   <!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -96,73 +96,77 @@
       </div>
 
 
-      <div class="page-section">
-        <div class="hero-section">
+      <div class="page-section blog-page">
+        <div class="hero-section about-section">
           <div class="hero-scroll">
             <div class="hero-track" style="padding: 30px;">
-              <div class="hs-item set-bg" style="text-align: center; width: 1060px; height: 800px;">
-                <!-- Create a div where the graph will take place -->
-                <div id="slider_container" style="margin-right: -110px;">
-                  <input type="range" id="sliderRadar" />
-                  <p id="labelRadar"> </p>
+              <div class="row">
+                <div class="hs-item set-bg" style="text-align: center; width: 1060px; height: 800px;">
+                  <!-- Create a div where the graph will take place -->
+                  <div id="slider_container">
+                    <input type="range" id="sliderRadar" />
+                    <p id="labelRadar"> </p>
+                  </div>
+                  <div id="radar_chart"></div>
                 </div>
-                <div id="radar_chart"></div>
+                <div class="hs-item set-bg" style="text-align: center; width: 1060px; height: 800px;">
+                  <!-- Create a div where the graph will take place -->
+                  <div id="slider_container">
+                    <input type="range" id="sliderRadar1" />
+                    <p id="labelRadar1"> </p>
+                  </div>
+                  <div id="radar_chart1"></div>
+                </div>
+                <div class="hs-item set-bg" style="text-align: center; width: 1060px; height: 800px;">
+                  <!-- Create a div where the graph will take place -->
+                  <div id="slider_container">
+                    <input type="range" id="sliderRadar2" />
+                    <p id="labelRadar2"> </p>
+                  </div>
+                  <div id="radar_chart2"></div>
+                </div>
+                <div class="hs-item set-bg" style="text-align: center; width: 1060px; height: 800px;">
+                  <!-- Create a div where the graph will take place -->
+                  <div id="slider_container">
+                    <input type="range" id="sliderRadar3" />
+                    <p id="labelRadar3"> </p>
+                  </div>
+                  <div id="radar_chart3"></div>
+                </div>
               </div>
-              <div class="hs-item set-bg" style="text-align: center; width: 1060px; height: 800px;">
-                <!-- Create a div where the graph will take place -->
-                <div id="slider_container" style="margin-right: -110px;">
-                  <input type="range" id="sliderRadar1" />
-                  <p id="labelRadar1"> </p>
+              <div class="row">
+                <div class="hs-item set-bg" style="text-align: center; width: 1060px; height: 800px;">
+                  <!-- Create a div where the graph will take place -->
+                  <div id="slider_container">
+                    <input type="range" id="sliderRadar4" />
+                    <p id="labelRadar4"> </p>
+                  </div>
+                  <div id="radar_chart4"></div>
                 </div>
-                <div id="radar_chart1"></div>
-              </div>
-              <div class="hs-item set-bg" style="text-align: center; width: 1060px; height: 800px;">
-                <!-- Create a div where the graph will take place -->
-                <div id="slider_container" style="margin-right: -110px;">
-                  <input type="range" id="sliderRadar2" />
-                  <p id="labelRadar2"> </p>
+                <div class="hs-item set-bg" style="text-align: center; width: 1060px; height: 800px;">
+                  <!-- Create a div where the graph will take place -->
+                  <div id="slider_container">
+                    <input type="range" id="sliderRadar5" />
+                    <p id="labelRadar5"> </p>
+                  </div>
+                  <div id="radar_chart5"></div>
                 </div>
-                <div id="radar_chart2"></div>
-              </div>
-              <div class="hs-item set-bg" style="text-align: center; width: 1060px; height: 800px;">
-                <!-- Create a div where the graph will take place -->
-                <div id="slider_container" style="margin-right: -110px;">
-                  <input type="range" id="sliderRadar3" />
-                  <p id="labelRadar3"> </p>
+                <div class="hs-item set-bg" style="text-align: center; width: 1060px; height: 800px;">
+                  <!-- Create a div where the graph will take place -->
+                  <div id="slider_container">
+                    <input type="range" id="sliderRadar6" />
+                    <p id="labelRadar6"> </p>
+                  </div>
+                  <div id="radar_chart6"></div>
                 </div>
-                <div id="radar_chart3"></div>
-              </div>
-              <div class="hs-item set-bg" style="text-align: center; width: 1060px; height: 800px;">
-                <!-- Create a div where the graph will take place -->
-                <div id="slider_container" style="margin-right: -110px;">
-                  <input type="range" id="sliderRadar4" />
-                  <p id="labelRadar4"> </p>
+                <div class="hs-item set-bg" style="text-align: center; width: 1060px; height: 800px;">
+                  <!-- Create a div where the graph will take place -->
+                  <div id="slider_container">
+                    <input type="range" id="sliderRadar7" />
+                    <p id="labelRadar7"> </p>
+                  </div>
+                  <div id="radar_chart7"></div>
                 </div>
-                <div id="radar_chart4"></div>
-              </div>
-              <div class="hs-item set-bg" style="text-align: center; width: 1060px; height: 800px;">
-                <!-- Create a div where the graph will take place -->
-                <div id="slider_container" style="margin-right: -110px;">
-                  <input type="range" id="sliderRadar5" />
-                  <p id="labelRadar5"> </p>
-                </div>
-                <div id="radar_chart5"></div>
-              </div>
-              <div class="hs-item set-bg" style="text-align: center; width: 1060px; height: 800px;">
-                <!-- Create a div where the graph will take place -->
-                <div id="slider_container" style="margin-right: -110px;">
-                  <input type="range" id="sliderRadar6" />
-                  <p id="labelRadar6"> </p>
-                </div>
-                <div id="radar_chart6"></div>
-              </div>
-              <div class="hs-item set-bg" style="text-align: center; width: 1060px; height: 800px;">
-                <!-- Create a div where the graph will take place -->
-                <div id="slider_container" style="margin-right: -110px;">
-                  <input type="range" id="sliderRadar7" />
-                  <p id="labelRadar7"> </p>
-                </div>
-                <div id="radar_chart7"></div>
               </div>
             </div>
           </div>
@@ -203,7 +207,7 @@
 
   <script type="module">
     import Data from './js/d3/Data.js';
-    import RadarChart from './js/d3/radarChart.js';
+    import RadarChart from './js/d3/smallRadarChart.js';
     import Plot from './js/d3/plot.js';
     var data = new Data();
 
@@ -219,13 +223,13 @@
     };
 
     var radarChartOptionsUnique = {
-      w: 490,
-      h: 550,
+      w: 200,
+      h: 200,
       levels: 5,
       roundStrokes: true,
       color: d3.scaleOrdinal().range(["#AFC52F"]),
       format: '.0f',
-      legend: { title: 'Course', translateX: -35, translateY: -300 },
+      legend: { title: 'Course', translateX: -35, translateY: -150 },
       unit: ''
     };
 
