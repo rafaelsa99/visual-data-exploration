@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
+<!-- Template by Colorlib (https://colorlib.com) -->
 <head>
-  <title>Preferences Option - Course</title>
+  <title>Preferências Opção - Curso</title>
   <meta charset="UTF-8">
-  <meta name="description" content="Preferences Option - Course">
+  <meta name="description" content="Preferências Opção - Curso">
   <meta name="keywords" content="UA, DETI">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -53,11 +53,11 @@
 
       <ul class="site-menu">
         <li><a href="index.html">Home</a></li>
-        <li><a href="lineplot1.html">Last Placed Students' Grades</a></li>
-        <li><a href="barchart.html">Placed Students' Grades</a></li>
-        <li><a href="lineplot2.html">Course Position in the Applications</a></li>
-        <li><a href="radarchart.html">Preferences Option - Course</a></li>
-        <li><a href="chorddiagram.html">Students' Alternatives</a></li>
+        <li><a href="lineplot1.html">Notas de Acesso</a></li>
+        <li><a href="barchart.html">Notas dos Colocados</a></li>
+        <li><a href="lineplot2.html">Posição do Curso nas Candidaturas</a></li>
+        <li><a href="radarchart.html">Preferências Opção - Curso</a></li>
+        <li><a href="chorddiagram.html">Alternativas dos Candidatos</a></li>
       </ul>
     </div>
     <header class="header-section">
@@ -70,45 +70,35 @@
       <div class="main-sidebar">
         <div class="mb-warp">
           <div class="about-info">
-            <h2>Preferences Option - Course</h2>
-            <h5>The visualization presents the preferences of the candidates regarding the course, depending on the
-              option of the application.
+            <h2>Preferências Opção - Curso</h2>
+            <h5>A visualização apresenta as preferências dos candidatos na escolha do curso, consoante a opção da
+              candidatura.
             </h5><br>
-            <a href="radarchartmultiple.html"><button class="site-btn sb-dark">View with multiple graphics</button></a>
+            <a href="radarchartmultiple.html"><button class="site-btn sb-dark">Ver com múltiplos gráficos</button></a>
           </div>
-          <div>
-            <div class="tab-element">
-              <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1"
-                    aria-selected="true">Interactions</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2"
-                    aria-selected="false">Conclusions</a>
-                </li>
-              </ul>
-              <div class="tab-content" id="myTabContent">
-
-                <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
-                  <h6>The interactions available on the visualization are:</h6><br>
-                  <p><b>Year selection: </b>Through the slider it is possible to specify the year for which the
-                    information is to be viewed.</p>
-                  <p><b>Data filtering: </b>By pressing on the several courses, presented in the caption next to the
-                    graphic, it is possible to show/hide its information. The courses visible in the graphic are
-                    represented with their caption in bold.</p>
-                  <p><b>Brushing: </b>By moving the cursor over an area, that area is highlighted in relation to the
-                    others, and it is possible to see to which course it refers.</p>
-                  <p><b>Animation of the evolution: </b>By clicking the button, it is possible to view an animation in
-                    the graphic, showing the data for each year between the selected time interval. The duration of the animation in
-                    each year can be adjusted in the input.</p>
-                  <p><b>Time range selection for the animation: </b>Through the slider with two variables it is
-                    possible to select a specific time interval for the animation of the evolution.</p>
-                </div>
-                <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus libero mauris, biben-dum eget
-                    sapien ac, ultrices rhoncus ipsum. Donec nec sapien in urna fermentum ornare. Morbi vel ultrices
-                    leo. Sed eu turpis eu arcu vehicula fringilla ut vitae orci. Suspendisse maximus malesuada </p>
+          <div id="accordion" class="accordion-area">
+            <div class="panel">
+              <div class="panel-header active" id="headingOne">
+                <button class="panel-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true"
+                  aria-controls="collapse1">Interações Disponíveis</button>
+              </div>
+              <div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="panel-body">
+                  <br>
+                  <h6>As interações disponíveis na visualização são:</h6>
+                  <p><b>Seleção do ano: </b>Através do slider é possível selecionar um ano específico, dentro dos anos
+                    disponíveis, para o qual se quer visualizar os dados.</p>
+                  <p><b>Filtragem de dados: </b>Ao premir os vários cursos da legenda, apresentada ao lado
+                    do gráfico, é possível mostrar/ocultar a sua informação. Os cursos visíveis no gráfico são
+                    representados com a sua legenda a negrito.</p>
+                  <p><b>Brushing: </b>Ao colocar o cursor sobre uma área do gráfico, essa área é realçada em relação às
+                    restantes, e é possível ver a que curso é referente.</p>
+                  <p><b>Animação da evolução: </b>Ao clicar no botão, é possível visualizar uma animação no gráfico que
+                    mostra os dados para cada ano do intervalo de tempo selecionado. A duração da animação em cada ano
+                    pode ser ajustada, alterando o valor do input.</p>
+                  <p><b>Seleção do intervalo temporal para a animação: </b>Através do slider de duas variáveis é
+                    possível selecionar um intervalo de
+                    tempo específico, dentro dos anos disponíveis, para a animação da evolução.</p>
                 </div>
               </div>
             </div>
@@ -120,13 +110,14 @@
       <div class="page-section about-page" style="padding: 30px;">
         <div class="about-section">
           <!-- Create a div where the graph will take place -->
-          <div id="slider_container">
-            <input type="range" id="sliderRadar" />
-            <p id="labelRadar"> </p>
-          </div>
-          <div>
-            <div id="radar_chart"></div>
-            <div class="container">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm" style="margin: auto;">
+                <div id="slider_container">
+                  <input type="range" id="sliderRadar" />
+                  <p id="labelRadar"> </p>
+                </div>
+              </div>
               <div class="col-sm">
                 <div class="row align-items-center">
                   <div style="display: none;">
@@ -135,12 +126,15 @@
                   <div class="col-sm" style="margin: auto;">
                     <div id="slider-range"></div>
                   </div>
+                  <label for="duration">Duração da animação (segundos): </label>
+                  <input type="number" step="0.5" min="0.5" value="1.0" id="duration" /><br><br>
+                  <input class="site-btn-small" name="updateButton" type="button" value="Ver Evolução" id="viewAnimation" />
                 </div>
               </div>
             </div>
-            <label for="duration">Duration of the animation (seconds): </label>
-            <input type="number" step="0.5" min="0.5" value="1.0" id="duration" /><br><br>
-            <input name="updateButton" type="button" value="See Evolution" id="viewAnimation" />
+          </div>
+          <div>
+            <div id="radar_chart"></div>
           </div>
         </div>
       </div>
@@ -148,9 +142,9 @@
     </div>
     <div class="copyright">
       <p>
-        Information Visualization - MEI &copy;
+        Visualização de Informação - MEI &copy;
+        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
         <script>document.write(new Date().getFullYear());</script>
-        Template by <a href="https://colorlib.com" target="_blank">Colorlib</a>
       </p>
     </div>
   </div>
@@ -190,7 +184,7 @@
       roundStrokes: true,
       color: d3.scaleOrdinal().range(["#AFC52F", "#ff6600", "#3258a8", "#db2121", "#fffb26", "#5c350b", "#c10ec4", "#0ec4af"]),
       format: '.0f',
-      legend: { title: 'Courses', translateX: -35, translateY: -300 },
+      legend: { title: 'Cursos', translateX: -35, translateY: -300 },
       unit: ''
     };
 

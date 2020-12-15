@@ -201,21 +201,21 @@ class GroupedBarPlot {
                 let count = 0
                 let sum = 0
                 data.forEach(d => {
-                    let sub = subgroups.map(function (key) { return { grade: d.grade, count: d[key] }; });
+                    let sub = subgroups.map(function (key) { return { nota: d.nota, count: d[key] }; });
                     sub.forEach(element => {
-                        if (gradeN != element.grade && gradeN != 0) {
-                            fdata.push({ grade: gradeN, med: count / sum })
+                        if (gradeN != element.nota && gradeN != 0) {
+                            fdata.push({ nota: gradeN, med: count / sum })
                             sum = 0
                             count = 0
                         }
-                        gradeN = element.grade
+                        gradeN = element.nota
                         if (element.count != undefined) {
                             count += parseInt(element.count)
                             sum += 1
                         }
 
                     });
-                    fdata.push({ grade: gradeN, med: count / sum })
+                    fdata.push({ nota: gradeN, med: count / sum })
                 });
                 //console.log(fdata)
                 return fdata
@@ -224,9 +224,9 @@ class GroupedBarPlot {
             .attr("fill", "none")
             .attr("stroke", "#520f0f")
             .attr("stroke-width", 2.5)
-            .attr("transform", function (d, i) { return "translate(" + x(d[i].grade) + ",0)"; })
+            .attr("transform", function (d, i) { return "translate(" + x(d[i].nota) + ",0)"; })
             .attr("d", d3.line()
-                .x(function (d) { return x(d.grade) })
+                .x(function (d) { return x(d.nota) })
                 .y(function (d) { return y(d.med) })
             );
 
@@ -237,11 +237,11 @@ class GroupedBarPlot {
             .enter()
             .append('g')
             .append("text")
-            .attr("class", "Mean")
+            .attr("class", "Média")
             .attr('transform', `translate(${400},${400})`)
             .attr("x", width / 2 - 65)
             .attr("y", (d, i) => i * 20)
-            .text("Mean")
+            .text("Média")
             .style("fill", "#520f0f")
             .style("font-size", 20)
             .style("font-weight", "bold")
@@ -311,7 +311,7 @@ class GroupedBarPlot {
         var showTooltip = (d) => {
             tooltip
                 .style("opacity", 1)
-                .html("Value: " + d.value + "<br>Year: " + (d.key).replace("Ano", ""))
+                .html("Valor: " + d.value + "<br>Ano: " + (d.key).replace("Ano", ""))
                 .style("left", (d3.event.pageX + 16) + "px")
                 .style("top", (d3.event.pageY + 16) + "px");
         }

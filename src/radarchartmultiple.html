@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
+<!-- Template by Colorlib (https://colorlib.com) -->
 <head>
-  <title>Preferences Option - Course</title>
+  <title>Preferências Opção - Curso</title>
   <meta charset="UTF-8">
-  <meta name="description" content="Preferences Option - Course">
+  <meta name="description" content="Preferências Opção - Curso">
   <meta name="keywords" content="UA, DETI">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -53,11 +53,11 @@
 
       <ul class="site-menu">
         <li><a href="index.html">Home</a></li>
-        <li><a href="lineplot1.html">Last Placed Students' Grades</a></li>
-        <li><a href="barchart.html">Placed Students' Grades</a></li>
-        <li><a href="lineplot2.html">Course Position in the Applications</a></li>
-        <li><a href="radarchart.html">Preferences Option - Course</a></li>
-        <li><a href="chorddiagram.html">Students' Alternatives</a></li>
+        <li><a href="lineplot1.html">Notas de Acesso</a></li>
+        <li><a href="barchart.html">Notas dos Colocados</a></li>
+        <li><a href="lineplot2.html">Posição do Curso nas Candidaturas</a></li>
+        <li><a href="radarchart.html">Preferências Opção - Curso</a></li>
+        <li><a href="chorddiagram.html">Alternativas dos Candidatos</a></li>
       </ul>
     </div>
     <header class="header-section">
@@ -70,40 +70,29 @@
       <div class="main-sidebar">
         <div class="mb-warp">
           <div class="about-info">
-            <h2>Preferences Option - Course</h2>
-            <h5>The visualization presents the preferences of the candidates regarding the course, depending on the
-              option of the application.
+            <h2>Preferências Opção - Curso</h2>
+            <h5>A visualização apresenta as preferências dos candidatos na escolha do curso, consoante a opção da
+              candidatura.
             </h5><br>
-            <a href="radarchart.html"><button class="site-btn sb-dark">View with single graphic</button></a>
+            <a href="radarchart.html"><button class="site-btn sb-dark">Ver com um único gráfico</button></a>
           </div>
-          <div>
-            <div class="tab-element">
-              <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1"
-                    aria-selected="true">Interactions</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2"
-                    aria-selected="false">Conclusions</a>
-                </li>
-              </ul>
-              <div class="tab-content" id="myTabContent">
-
-                <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
-                  <h6>The interactions available on the visualization are:</h6><br>
-                  <p><b>Year selection: </b>Through the slider it is possible to specify the year for which the
-                    information is to be viewed in each graphic.</p>
-                  <p><b>Data filtering: </b>By pressing on the course caption, presented next to the
-                    graphic, it is possible to show/hide its information. When the course is visible, its caption is
-                    presented in bold.</p>
-                  <p><b>Brushing: </b>By moving the cursor over an area, that area is highlighted and it is possible to
-                    see to which course it refers.</p>
-                </div>
-                <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus libero mauris, biben-dum eget
-                    sapien ac, ultrices rhoncus ipsum. Donec nec sapien in urna fermentum ornare. Morbi vel ultrices
-                    leo. Sed eu turpis eu arcu vehicula fringilla ut vitae orci. Suspendisse maximus malesuada </p>
+          <div id="accordion" class="accordion-area">
+            <div class="panel">
+              <div class="panel-header active" id="headingOne">
+                <button class="panel-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true"
+                  aria-controls="collapse1">Interações Disponíveis</button>
+              </div>
+              <div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="panel-body">
+                  <br>
+                  <h6>As interações disponíveis na visualização são:</h6>
+                  <p><b>Seleção do ano: </b>Através do slider é possível selecionar um ano específico, dentro dos anos
+                    disponíveis, para o qual se quer visualizar os dados.</p>
+                  <p><b>Filtragem de dados: </b>Ao premir o curso da legenda, apresentada ao lado
+                    do gráfico, é possível mostrar/ocultar a sua informação. Quando o curso está visível
+                    no gráfico, a sua legenda é apresentada a negrito.</p>
+                  <p><b>Brushing: </b>Ao colocar o cursor sobre uma área do gráfico, essa área é realçada e é possível
+                    ver a que curso é referente.</p>
                 </div>
               </div>
             </div>
@@ -193,9 +182,9 @@
   </div>
   <div class="copyright">
     <p>
-      Information Visualization - MEI &copy;
+      Visualização de Informação - MEI &copy;
+      <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
       <script>document.write(new Date().getFullYear());</script>
-      Template by <a href="https://colorlib.com" target="_blank">Colorlib</a>
     </p>
   </div>
   </div>
@@ -228,17 +217,6 @@
     import Plot from './js/d3/plot.js';
     var data = new Data();
 
-    var radarChartOptions = {
-      w: 490,
-      h: 550,
-      levels: 5,
-      roundStrokes: true,
-      color: d3.scaleOrdinal().range(["#AFC52F", "#ff6600", "#3258a8", "#db2121", "#fffb26", "#5c350b", "#c10ec4", "#0ec4af"]),
-      format: '.0f',
-      legend: { title: 'Cursos', translateX: -35, translateY: -300 },
-      unit: ''
-    };
-
     var radarChartOptionsUnique = {
       w: 200,
       h: 200,
@@ -246,7 +224,7 @@
       roundStrokes: true,
       color: d3.scaleOrdinal().range(["#AFC52F"]),
       format: '.0f',
-      legend: { title: 'Course', translateX: -35, translateY: -150 },
+      legend: { title: 'Curso', translateX: -35, translateY: -150 },
       unit: ''
     };
 

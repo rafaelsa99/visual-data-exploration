@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
+<!-- Template by Colorlib (https://colorlib.com) -->
 <head>
-  <title>Last Placed Students' Grades</title>
+  <title>Notas de Acesso</title>
   <meta charset="UTF-8">
-  <meta name="description" content="Last Placed Students' Grades">
+  <meta name="description" content="Notas de Acesso">
   <meta name="keywords" content="UA, DETI">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -53,11 +53,11 @@
 
       <ul class="site-menu">
         <li><a href="index.html">Home</a></li>
-        <li><a href="lineplot1.html">Last Placed Students' Grades</a></li>
-        <li><a href="barchart.html">Placed Students' Grades</a></li>
-        <li><a href="lineplot2.html">Course Position in the Applications</a></li>
-        <li><a href="radarchart.html">Preferences Option - Course</a></li>
-        <li><a href="chorddiagram.html">Students' Alternatives</a></li>
+        <li><a href="lineplot1.html">Notas de Acesso</a></li>
+        <li><a href="barchart.html">Notas dos Colocados</a></li>
+        <li><a href="lineplot2.html">Posição do Curso nas Candidaturas</a></li>
+        <li><a href="radarchart.html">Preferências Opção - Curso</a></li>
+        <li><a href="chorddiagram.html">Alternativas dos Candidatos</a></li>
       </ul>
     </div>
     <header class="header-section">
@@ -70,39 +70,31 @@
       <div class="main-sidebar">
         <div class="mb-warp">
           <div class="about-info">
-            <h2>Last Placed Students' Grades</h2>
-            <h5>The visualization presents the time evolution of the admission grades at MIEET and similar courses.
+            <h2>Notas de Acesso</h2>
+            <h5>A visualização apresenta a evolução temporal das notas de candidatura do último colocado no MIEET e nos
+              cursos equiparados.
             </h5>
           </div>
           <div>
-            <div class="tab-element">
-              <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1"
-                    aria-selected="true">Interactions</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2"
-                    aria-selected="false">Conclusions</a>
-                </li>
-              </ul>
-              <div class="tab-content" id="myTabContent">
-
-                <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
-                  <h6>The interactions available on the visualization are:</h6><br>
-                  <p><b>Time range selection: </b>Through the slider it is possible to select a specific time range,
-                    within the available years, to present the information.</p>
-                  <p><b>Data filtering: </b>By pressing on the several courses, presented in the caption above the
-                    graphic, it is possible to show/hide its information. The courses visible in the graphic are
-                    represented with their caption in bold.</p>
-                  <p><b>Brushing and detailed information: </b>By moving the cursor to the line related to a course, it
-                    is possible to view detailed information about the admission grade in a specific year, highlighting
-                    that line in relation to the others.</p>
+            <div id="accordion" class="accordion-area">
+              <div class="panel">
+                <div class="panel-header active" id="headingOne">
+                  <button class="panel-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true"
+                    aria-controls="collapse1">Interações Disponíveis</button>
                 </div>
-                <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus libero mauris, biben-dum eget
-                    sapien ac, ultrices rhoncus ipsum. Donec nec sapien in urna fermentum ornare. Morbi vel ultrices
-                    leo. Sed eu turpis eu arcu vehicula fringilla ut vitae orci. Suspendisse maximus malesuada </p>
+                <div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                  <div class="panel-body">
+                    <br>
+                    <h6>As interações disponíveis na visualização são:</h6>
+                    <p><b>Seleção do intervalo temporal: </b>Através do slider é possível selecionar um intervalo de
+                      tempo específico, dentro dos anos disponíveis, para o qual se quer visualizar os dados.</p>
+                    <p><b>Filtragem de dados: </b>Ao premir os vários cursos da legenda, apresentada acima
+                      do gráfico, é possível mostrar/ocultar a sua informação. Os cursos visíveis no gráfico são
+                      representados com a sua legenda a negrito.</p>
+                    <p><b>Brushing e informação detalhada: </b>Ao colocar o cursor sobre uma linha relacionada com um
+                      curso, é possível visualizar informação detalhada acerca da nota de acesso num ano específico,
+                      realçando essa linha em relação às restantes.</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -132,9 +124,9 @@
     </div>
     <div class="copyright">
       <p>
-        Information Visualization - MEI &copy;
+        Visualização de Informação - MEI &copy;
+        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
         <script>document.write(new Date().getFullYear());</script>
-        Template by <a href="https://colorlib.com" target="_blank">Colorlib</a>
       </p>
     </div>
   </div>

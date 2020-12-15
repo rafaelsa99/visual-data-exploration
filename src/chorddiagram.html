@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
+<!-- Template by Colorlib (https://colorlib.com) -->
 <head>
-  <title>Students' Alternatives</title>
+  <title>Alternativas dos Candidatos</title>
   <meta charset="UTF-8">
-  <meta name="description" content="Students' Alternatives">
+  <meta name="description" content="Alternativas dos Candidatos">
   <meta name="keywords" content="UA, DETI">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -53,11 +53,11 @@
 
       <ul class="site-menu">
         <li><a href="index.html">Home</a></li>
-        <li><a href="lineplot1.html">Last Placed Students' Grades</a></li>
-        <li><a href="barchart.html">Placed Students' Grades</a></li>
-        <li><a href="lineplot2.html">Course Position in the Applications</a></li>
-        <li><a href="radarchart.html">Preferences Option - Course</a></li>
-        <li><a href="chorddiagram.html">Students' Alternatives</a></li>
+        <li><a href="lineplot1.html">Notas de Acesso</a></li>
+        <li><a href="barchart.html">Notas dos Colocados</a></li>
+        <li><a href="lineplot2.html">Posição do Curso nas Candidaturas</a></li>
+        <li><a href="radarchart.html">Preferências Opção - Curso</a></li>
+        <li><a href="chorddiagram.html">Alternativas dos Candidatos</a></li>
       </ul>
     </div>
     <header class="header-section">
@@ -70,61 +70,48 @@
       <div class="main-sidebar">
         <div class="mb-warp">
           <div class="about-info">
-            <h2>Students' Alternatives</h2>
-            <h5>The visualization presents the placements and alternatives of the candidates to MIEET and similar
-              courses, considering all the options of the application or only one in specific.
+            <h2>Alternativas dos Candidatos</h2>
+            <h5>A visualização apresenta as colocações e as alternativas dos candidatos ao MIEET e aos cursos
+              congéneros, considerando todas as opções das candidaturas ou apenas uma em específico.
             </h5>
           </div>
           <div id="accordion" class="accordion-area">
             <div class="panel">
               <div class="panel-header" id="headingOne">
                 <button class="panel-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="false"
-                  aria-controls="collapse1">How to interpret the information of the visualization?</button>
+                  aria-controls="collapse1">Como interpretar a informação da visualização?</button>
               </div>
               <div id="collapse1" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                 <div class="panel-body">
-                  <p>The size of one fragment of the outer part of the diagram represents the percentage of applications
-                    for the course in relation to the total number of applications. <br>
-                    <b>Examples of interpretation of chords:</b><br>
-                    <i>UA-EET &rarr; UP-EEC: 4.52%: </i> This means that 4.52% of the total number of applications,
-                    applied for the UA-EET course and had as an option the UP-EEC course.<br>
-                    <i>UA-EET &rarr; UA-EET: 1.95%: </i> This means that 1.95% of the total number of applications,
-                    applied for the UA-EET course and were placed.
+                  <p>O tamanho de um fragmento da parte exterior do diagrama representa a percentagem de candidaturas ao
+                    curso, em relação ao total de candidaturas analisadas.<br>
+                    <b>Exemplos de interpretações de conexões:</b><br>
+                    <i>UA-EET &rarr; UP-EEC: 4.52%: </i> Indica que 4.52% do total de candidatos analisados,
+                    candidataram-se ao curso UA-EET e tinham como opção o curso UP-EEC.<br>
+                    <i>UA-EET &rarr; UA-EET: 1.95%: </i> Indica que 1.95% do total de candidatos analisados,
+                    candidataram-se ao curso UA-EET e foram colocados.
                   </p>
                 </div>
               </div>
             </div>
-          </div>
           </br>
-          <div>
-            <div class="tab-element">
-              <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1"
-                    aria-selected="true">Interactions</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2"
-                    aria-selected="false">Conclusions</a>
-                </li>
-              </ul>
-              <div class="tab-content" id="myTabContent">
-
-                <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
-                  <h6>The interactions available on the visualization are:</h6><br>
-                  <p><b>Year selection: </b>Through the slider it is possible to specify the year for which the
-                    information is to be viewed.</p>
-                  <p><b>Option selection: </b>Through the drop-down list it is possible to select the options of the
-                    applications that will be considered when extracting the information for the visualization.</p>
-                  <p><b>Detailed information: </b>By placing the cursor on a chord of the diagram it is possible to see
-                    detailed information about the percentage between the two entities. </p>
-                  <p><b>Brushing: </b>By placing the cursor on a fragment of the outer part of the diagram, the cords
-                    concerning that fragment are highlighted in relation to the others.</p>
-                </div>
-                <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus libero mauris, biben-dum eget
-                    sapien ac, ultrices rhoncus ipsum. Donec nec sapien in urna fermentum ornare. Morbi vel ultrices
-                    leo. Sed eu turpis eu arcu vehicula fringilla ut vitae orci. Suspendisse maximus malesuada </p>
+            <div class="panel">
+              <div class="panel-header active" id="headingTwo">
+                <button class="panel-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="true"
+                  aria-controls="collapse1">Interações Disponíveis</button>
+              </div>
+              <div id="collapse2" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="panel-body">
+                  <br>
+                  <h6>As interações disponíveis na visualização são:</h6>
+                  <p><b>Seleção do ano: </b>Através do slider é possível selecionar um ano específico, dentro dos anos
+                    disponíveis, para o qual se quer visualizar os dados.</p>
+                  <p><b>Seleção das opções: </b>Através do menu drop-down é possível escolher as opções das candidaturas
+                    para as quais se quer visualizar os dados.</p>
+                  <p><b>Informação detalhada: </b>Ao colocar o cursor sobre uma conexão do diagrama, é possível
+                    visualizar informação detalhada acerca das percentagens entre os cursos das duas extremidades.</p>
+                  <p><b>Brushing: </b>Ao colocar o cursor sobre um fragmento da parte exterior do diagrama, as conexões
+                    relacionadas com esse fragmento são realçadas em relação às restantes.</p>
                 </div>
               </div>
             </div>
@@ -143,16 +130,16 @@
                 <p id="labelChord"> </p>
               </div>
               <div class="col-sm" style="margin: auto;">
-                <label for="option">Choose an option:</label>
+                <label for="option">Opções da Candidatura:</label>
                 <select id="option">
-                  <option value="0">All Options</option>
+                  <option value="0">Todas as Opções</option>
                   <optgroup label="Options">
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                    <option value="4">Option 4</option>
-                    <option value="5">Option 5</option>
-                    <option value="6">Option 6</option>
+                    <option value="1">Opção 1</option>
+                    <option value="2">Opção 2</option>
+                    <option value="3">Opção 3</option>
+                    <option value="4">Opção 4</option>
+                    <option value="5">Opção 5</option>
+                    <option value="6">Opção 6</option>
                   </optgroup>
                 </select>
               </div>
@@ -167,9 +154,9 @@
     </div>
     <div class="copyright">
       <p>
-        Information Visualization - MEI &copy;
+        Visualização de Informação - MEI &copy;
+        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
         <script>document.write(new Date().getFullYear());</script>
-        Template by <a href="https://colorlib.com" target="_blank">Colorlib</a>
       </p>
     </div>
   </div>

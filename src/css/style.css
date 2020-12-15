@@ -156,6 +156,25 @@ Commom elements
 	background: transparent;
 }
 
+.site-btn-small {
+	display: inline-block;
+	font-size: 12px;
+	font-weight: 700;
+	min-width: 120px;
+	padding: 10px 15px;
+	text-transform: uppercase;
+	color: #242424;
+	line-height: 1;
+	cursor: pointer;
+	text-align: center;
+	border: 2px solid #e1e1e1;
+	background: transparent;
+}
+
+.site-btn-small:hover {
+	color: #000000;
+}
+
 .site-btn:hover {
 	color: #242424;
 }
@@ -316,6 +335,19 @@ Commom elements
 }
 
 /* Tab */
+
+.link {
+	color:#2c2c2c;
+}
+
+.link:hover{
+	color:#000000;
+}
+
+input[type=number]{
+	margin: 10px;
+    width: 60px;
+} 
 
 .tab-element .nav-tabs {
 	border-bottom: none;
@@ -670,7 +702,6 @@ body.push-side #ascrail2000-hr {
 	height: 32px;
 	left: -36px;
 	top: -5px;
-	background: url("../img/icons/place.png") no-repeat;
 }
 
 .contact-info li {

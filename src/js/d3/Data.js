@@ -15,7 +15,7 @@ class Data{
             } else {
                 i = grades_courses.size
                 var year = new Map()
-                year.set("year",obj.year)
+                year.set("ano",obj.year)
                 grades_courses.set(i, year);
                 append_years(obj.year, i)
             }
@@ -25,7 +25,7 @@ class Data{
             }
             if (pos == totalFiles) {
                 plot.cleanPlot();
-                plot.create_plot(get_JSON_Format(grades_courses), Array.from(listCourses),['year'],[100,axis_max + 5], "Grade of the Last Student Placed")
+                plot.create_plot(get_JSON_Format(grades_courses), Array.from(listCourses),['ano'],[100,axis_max + 5], "Nota do Último Colocado")
             }  
         }
 
@@ -36,10 +36,10 @@ class Data{
             }
             jsonArray.sort(
                 function (a, b) {
-                    if (a.year > b.year) {
+                    if (a.ano > b.ano) {
                         return 1; 
                     }
-                    if (a.year < b.year) { 
+                    if (a.ano < b.ano) { 
                         return -1; 
                     } 
                     // a must be equal to b 
@@ -103,18 +103,18 @@ class Data{
         const append_data = (obj, options, pos) => {
             var i = countOptions.size
             var year = new Map()
-            year.set("year",obj.year)
+            year.set("ano",obj.year)
             var sum = 0
             for(var j in options){
                 sum += options[j];
             }
             countOptions.set(i, year);
-            countOptions.get(i).set("Option1", String((options.opt1/sum) * 100));
-            countOptions.get(i).set("Option2", String((options.opt2/sum) * 100));
-            countOptions.get(i).set("Option3", String((options.opt3/sum) * 100));
-            countOptions.get(i).set("Option4", String((options.opt4/sum) * 100));
-            countOptions.get(i).set("Option5", String((options.opt5/sum) * 100));
-            countOptions.get(i).set("Option6", String((options.opt6/sum) * 100));
+            countOptions.get(i).set("Opção1", String((options.opt1/sum) * 100));
+            countOptions.get(i).set("Opção2", String((options.opt2/sum) * 100));
+            countOptions.get(i).set("Opção3", String((options.opt3/sum) * 100));
+            countOptions.get(i).set("Opção4", String((options.opt4/sum) * 100));
+            countOptions.get(i).set("Opção5", String((options.opt5/sum) * 100));
+            countOptions.get(i).set("Opção6", String((options.opt6/sum) * 100));
             if(((options.opt1/sum) * 100) > axis_max){
                 axis_max = ((options.opt1/sum) * 100);
             } 
@@ -135,7 +135,7 @@ class Data{
             }
             if (pos == totalFiles) {
                 plot.cleanPlot();
-                plot.create_plot(get_JSON_Format(countOptions), ['Option1', 'Option2', 'Option3', 'Option4', 'Option5', 'Option6'],['year'],[0,axis_max + 3],"Percentage of the Option Position")
+                plot.create_plot(get_JSON_Format(countOptions), ['Opção1', 'Opção2', 'Opção3', 'Opção4', 'Opção5', 'Opção6'],['ano'],[0,axis_max + 3],"Percentagem da Posição da Opção")
             }
         }
 
@@ -154,10 +154,10 @@ class Data{
             }
             jsonArray.sort(
                 function (a, b) {
-                    if (a.year > b.year) {
+                    if (a.ano > b.ano) {
                         return 1; 
                     }
-                    if (a.year < b.year) { 
+                    if (a.ano < b.ano) { 
                         return -1; 
                     } 
                     // a must be equal to b 
@@ -219,7 +219,7 @@ class Data{
                 } else {
                     i = grades.size
                     var nota = new Map()
-                    nota.set("grade",String(key))
+                    nota.set("nota",String(key))
                     grades.set(i, nota);
                     append_grade(key, i)
                 }
@@ -230,7 +230,7 @@ class Data{
             }
             if (pos == totalFiles) {
                 plot.clean_plot()
-                plot.create_plot(get_JSON_Format(grades),['grade'],[0, axis_max],"Number of Students Placed")
+                plot.create_plot(get_JSON_Format(grades),['nota'],[0, axis_max],"Número de Colocados")
             }
         }
 
@@ -253,17 +253,17 @@ class Data{
             }
             jsonArray.sort(
                 function (a, b) {
-                    if (a.grade > b.grade) {
+                    if (a.nota > b.nota) {
                         return 1; 
                     }
-                    if (a.grade < b.grade) { 
+                    if (a.nota < b.nota) { 
                         return -1; 
                     } 
                     // a must be equal to b 
                     return 0; 
                 }
             )
-            var columns = ["grade"];
+            var columns = ["nota"];
             for (var year = min_year; year <= max_year; year++) {
                 columns.push("Ano" + year)
             }
@@ -886,7 +886,7 @@ class Data{
                         var option;
                         data_file.forEach(data => {
                             if(is_relevant_course(data.Opcao1CursoCodigo,data.Opcao1InstituicaoCodigo) && is_same_course(data.Opcao1CursoCodigo,data.Opcao1InstituicaoCodigo,element.cod_course, element.cod_institution)){
-                                option = "Option1";
+                                option = "Opção1";
                                 if(opcoes.has(option)){
                                     opcoes.set(option, opcoes.get(option) + 1)
                                 } else {
@@ -894,7 +894,7 @@ class Data{
                                 }
                             }
                             if(is_relevant_course(data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo) && is_same_course(data.Opcao2CursoCodigo,data.Opcao2InstituicaoCodigo,element.cod_course, element.cod_institution)){
-                                option = "Option2";
+                                option = "Opção2";
                                 if(opcoes.has(option)){
                                     opcoes.set(option, opcoes.get(option) + 1)
                                 } else {
@@ -902,7 +902,7 @@ class Data{
                                 }
                             }
                             if(is_relevant_course(data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo) && is_same_course(data.Opcao3CursoCodigo,data.Opcao3InstituicaoCodigo,element.cod_course, element.cod_institution)){
-                                option = "Option3";
+                                option = "Opção3";
                                 if(opcoes.has(option)){
                                     opcoes.set(option, opcoes.get(option) + 1)
                                 } else {
@@ -910,7 +910,7 @@ class Data{
                                 }
                             }
                             if(is_relevant_course(data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo) && is_same_course(data.Opcao4CursoCodigo,data.Opcao4InstituicaoCodigo,element.cod_course, element.cod_institution)){
-                                option = "Option4";
+                                option = "Opção4";
                                 if(opcoes.has(option)){
                                     opcoes.set(option, opcoes.get(option) + 1)
                                 } else {
@@ -918,7 +918,7 @@ class Data{
                                 }
                             }
                             if(is_relevant_course(data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo) && is_same_course(data.Opcao5CursoCodigo,data.Opcao5InstituicaoCodigo,element.cod_course, element.cod_institution)){
-                                option = "Option5";
+                                option = "Opção5";
                                 if(opcoes.has(option)){
                                     opcoes.set(option, opcoes.get(option) + 1)
                                 } else {
@@ -926,7 +926,7 @@ class Data{
                                 }
                             }
                             if(is_relevant_course(data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo) && is_same_course(data.Opcao6CursoCodigo,data.Opcao6InstituicaoCodigo,element.cod_course, element.cod_institution)){
-                                option = "Option6";
+                                option = "Opção6";
                                 if(opcoes.has(option)){
                                     opcoes.set(option, opcoes.get(option) + 1)
                                 } else {

@@ -331,7 +331,7 @@ class LinePlot {
             tooltip
                 .style("opacity", 1)
                 .style("display", "block")
-                .html("Value: " + d.value.toFixed(2) + "<br>" + d.name)
+                .html("Valor: " + d.value.toFixed(2) + "<br>" + d.name)
                 .style("left", (d3.event.pageX + 16) + "px")
                 .style("top", (d3.event.pageY + 16) + "px");
         }

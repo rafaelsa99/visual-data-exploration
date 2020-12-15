@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="zxx">
+<!-- Template by Colorlib (https://colorlib.com) -->
 
 <head>
-  <title>Visual Data Exploration</title>
+  <title>Exploração Visual de Dados</title>
   <meta charset="UTF-8">
-  <meta name="description" content="Visual Data Exploration">
+  <meta name="description" content="Exploração Visual de Dados">
   <meta name="keywords" content="UA, DETI">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -38,11 +39,11 @@
 
       <ul class="site-menu">
         <li><a href="index.html">Home</a></li>
-        <li><a href="lineplot1.html">Last Placed Students' Grades</a></li>
-        <li><a href="barchart.html">Placed Students' Grades</a></li>
-        <li><a href="lineplot2.html">Course Position in the Applications</a></li>
-        <li><a href="radarchart.html">Preferences Option - Course</a></li>
-        <li><a href="chorddiagram.html">Students' Alternatives</a></li>
+        <li><a href="lineplot1.html">Notas de Acesso</a></li>
+        <li><a href="barchart.html">Notas dos Colocados</a></li>
+        <li><a href="lineplot2.html">Posição do Curso nas Candidaturas</a></li>
+        <li><a href="radarchart.html">Preferências Opção - Curso</a></li>
+        <li><a href="chorddiagram.html">Alternativas dos Candidatos</a></li>
       </ul>
     </div>
     <header class="header-section">
@@ -51,143 +52,156 @@
       </div>
     </header>
 
-    <div class="index-page">
-      <div class="mb-warp">
-        <a href="index.html" class="site-logo">
-          <h2>Visual Data Exploration</h2>
-        </a>
-        <div class="about-info">
-          <h2>Visualization of Information related to the Applications to MIEET and Similar Courses</h2>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus libero mauris, bibendum eget sapien ac,
-            ultrices rhoncus ipsum. Donec nec sapien in urna fermentum ornare. Morbi vel ultrices leo. Sed eu turpis
-            eu arcu vehicula fringilla ut vitae orci. Suspendisse maximus malesuada </6>
-        </div>
-        <div class="element">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-4 col-md-6">
-                <div class="icon-box">
-                  <div class="ib-head">
-                    <h5>Data Description</h5>
-                  </div>
-                  <p>The data contains information on higher education applications for MIEET and similar courses,
-                    between the years 2007 and 2016.</p>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6">
-                <div class="icon-box">
-                  <div class="ib-head">
-                    <h5>Users</h5>
-                  </div>
-                  <p>The users are the professors associated with MIEET, such as the course director, or all those who
-                    want to see statistical information about MIEET and similar courses.</p>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6">
-                <div class="icon-box">
-                  <div class="ib-head">
-                    <h5>Questions to Answer</h5>
-                  </div>
-                  <p>
-                    Some of the questions are:<br>
-                    What is the distribution of grades of those placed at MIEET?<br>
-                    What is the position of MIEET in the candidates' choices?<br>
-                    What are the alternatives of the students who applied to MIEET?</p>
-                </div>
-              </div>
-            </div>
+    <div class="site-content-warp">
+
+      <div class="main-sidebar">
+        <div class="mb-warp">
+          <div class="about-info">
+            <h2>Exploração Visual de Dados</h2>
+            <p>Esta aplicação tem como objetivo a exploração visual de dados. As
+              visualizações ilustram características relevantes dos dados e permitem ao utilizador explorar visualmente
+              essa informação. As visualizações foram desenvolvidas utilizando a ferramenta d3.js. </p>
           </div>
-        </div>
-        <hr>
-        <div class="element">
-          <div class="row m-0 milestones">
-            <div class="col-lg-4 col-md-6 p-0">
-              <div class="milestone">
-                <h2>8</h2>
-                <div class="milestone-info">
-                  <h5>Courses compared</h5>
-                  <p>MIEET and similar courses</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 p-0">
-              <div class="milestone">
-                <h2>10</h2>
-                <div class="milestone-info">
-                  <h5>Years of information</h5>
-                  <p>From 2007 to 2016</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 p-0">
-              <div class="milestone">
-                <h2>5</h2>
-                <div class="milestone-info">
-                  <h5>Visualizations</h5>
-                  <p>Divided into two categories</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ul class="contact-info">
+            <li>Luís Laranjeira, 81526, lclm@ua.pt, MEI</li>
+            <li>Rafael Sá, 104552, rafael.sa@ua.pt, MEI</li>
+          </ul>
+          <ul class="contact-info">
+            <li>Visualização de Informação - Mestrado em Engenharia Informática</li>
+            <li>Departamento de Electrónica, Telecomunicações e Informática - Universidade de Aveiro</li>
+          </ul>
         </div>
       </div>
 
-      <div class="tab-element">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1"
-              aria-selected="true">Visualizations</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2"
-              aria-selected="false">Courses</a>
-          </li>
-        </ul>
-        <div class="tab-content" id="myTabContent" style="text-align: left;">
 
-          <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
-            <h5>Visualizations according to the admission grade:</h5>
-            <ul style="padding-left: 5em;">
-              <li><a href="lineplot1.html">Last Placed Students' Grades</a></li>
-              <li><a href="barchart.html">Placed Students' Grades</a></li>
-            </ul>
-            <br>
-            <h5>Visualizations according to the options of the applications:</h5>
-            <ul style="padding-left: 5em;">
-              <li><a href="lineplot2.html">Course Position in the Applications</a></li>
-              <li><a href="radarchart.html">Preferences Option - Course</a></li>
-              <li><a href="chorddiagram.html">Students' Alternatives</a></li>
-            </ul>
+      <div class="page-section elements-page">
+        <div class="elements-section">
+
+          <div class="element">
+            <h2 class="el-title">Visualização de dados relativos ao MIEET e comparação com cursos semelhantes</h2>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-4 col-md-6">
+                  <div class="icon-box">
+                    <div class="ib-head">
+                      <h5>Descrição dos Dados</h5>
+                    </div>
+                    <p>Os dados contêm informação relativa às candidaturas de acesso ao ensino superior para o MIEET e
+                      cursos equiparados, desde 2007 até 2016.</p>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <div class="icon-box">
+                    <div class="ib-head">
+                      <h5>Utilizadores e Contexto</h5>
+                    </div>
+                    <p>A aplicação deverá ser utilizada por pessoal ligado ao DETI, mais especificamente ao MIEET, que
+                      queira fazer a análise anual da informação estatística relacionada com o curso.</p>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <div class="icon-box">
+                    <div class="ib-head">
+                      <h5>Principais Perguntas</h5>
+                    </div>
+                    <p>A aplicação deve ajudar a responder a perguntas como: Qual a distribuição de notas dos colocados
+                      no MIEET?
+                      Qual a posição do MIEET nas preferências dos candidatos? Quais as alternativas dos alunos
+                      candidatos no MIEET? Como se destaca o MIEET em comparação com cursos semelhantes?</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
-            <ul style="padding-left: 5em;">
-              <li><b>UA-EET: </b>Universidade de Aveiro - Engenharia Eletrónica e Telecomunicações</li>
-              <li><b>UC-EEC: </b>Universidade de Coimbra - Faculdade de Ciências e Tecnologia - Engenharia Eletrotécnica
-                e de Computadores</li>
-              <li><b>IST-EEC: </b>Universidade Técnica de Lisboa - Instituto Superior Técnico - Engenharia Eletrotécnica
-                e de Computadores</li>
-              <li><b>UNL-EEC: </b>Universidade Nova de Lisboa - Faculdade de Ciências e Tecnologia - Engenharia
-                Eletrotécnica e de Computadores</li>
-              <li><b>UM-EEI: </b>Universidade do Minho - Engenharia Eletrónica Industrial e Computadores</li>
-              <li><b>UP-EEC: </b>Universidade do Porto - Faculdade de Engenharia - Engenharia Eletrotécnica e de
-                Computadores</li>
-              <li><b>ISEL-EETC: </b>Instituto Politécnico de Lisboa - Instituto Superior de Engenharia de Lisboa -
-                Engenharia Eletrónica e Telecomunicações e de Computadores</li>
-              <li><b>ISEP-EEC: </b>Instituto Politécnico do Porto - Instituto Superior de Engenharia do Porto -
-                Engenharia Eletrotécnica e de Computadores</li>
-            </ul>
+
+          <div class="element">
+            <div class="row m-0 milestones">
+              <div class="col-lg-4 col-md-6 p-0">
+                <div class="milestone">
+                  <h2>8</h2>
+                  <div class="milestone-info">
+                    <h5>Cursos comparados</h5>
+                    <p>MIEET e cursos equiparados</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 p-0">
+                <div class="milestone">
+                  <h2>10</h2>
+                  <div class="milestone-info">
+                    <h5>Anos de informação</h5>
+                    <p>Desde 2007 até 2016</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 p-0">
+                <div class="milestone">
+                  <h2>5</h2>
+                  <div class="milestone-info">
+                    <h5>Visualizações</h5>
+                    <p>Divididas em duas categorias</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+
+          <div class="element">
+            <div class="tab-element">
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1"
+                    aria-selected="true">Visualizações</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2"
+                    aria-selected="false">Cursos</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent" style="text-align: left;">
+
+                <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
+                  <h5>Visualizações em função da nota de acesso:</h5>
+                  <p><a href="lineplot1.html" class="link">Notas de Acesso</a></p>
+                  <p><a href="barchart.html" class="link">Notas dos Colocados</a></p>
+                  <br>
+                  <h5>Visualizações em função das opções das candidaturas:</h5>
+                  <p><a href="lineplot2.html" class="link">Posição do Curso nas Candidaturas</a></p>
+                  <p><a href="radarchart.html" class="link">Preferências Opção - Curso</a></p>
+                  <p><a href="chorddiagram.html" class="link">Alternativas dos Candidatos</a></p>
+                </div>
+                <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
+                  <p><b>UA-EET: </b>Universidade de Aveiro - Engenharia Eletrónica e Telecomunicações</p>
+                  <p><b>UC-EEC: </b>Universidade de Coimbra - Faculdade de Ciências e Tecnologia - Engenharia
+                    Eletrotécnica
+                    e de Computadores</p>
+                  <p><b>IST-EEC: </b>Universidade Técnica de Lisboa - Instituto Superior Técnico - Engenharia
+                    Eletrotécnica
+                    e de Computadores</p>
+                  <p><b>UNL-EEC: </b>Universidade Nova de Lisboa - Faculdade de Ciências e Tecnologia - Engenharia
+                    Eletrotécnica e de Computadores</p>
+                  <p><b>UM-EEI: </b>Universidade do Minho - Engenharia Eletrónica Industrial e Computadores</p>
+                  <p><b>UP-EEC: </b>Universidade do Porto - Faculdade de Engenharia - Engenharia Eletrotécnica e de
+                    Computadores</p>
+                  <p><b>ISEL-EETC: </b>Instituto Politécnico de Lisboa - Instituto Superior de Engenharia de Lisboa -
+                    Engenharia Eletrónica e Telecomunicações e de Computadores</p>
+                  <p><b>ISEP-EEC: </b>Instituto Politécnico do Porto - Instituto Superior de Engenharia do Porto -
+                    Engenharia Eletrotécnica e de Computadores</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <div class="copyright-index">
-        <p>
-          Information Visualization - MEI &copy;
-          <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-          <script>document.write(new Date().getFullYear());</script>
-          Template by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-        </p>
-      </div>
+    </div>
+    <div class="copyright">
+      <p>
+        Visualização de Informação - MEI &copy;
+        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+        <script>document.write(new Date().getFullYear());</script>
+      </p>
     </div>
   </div>
 
