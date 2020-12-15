@@ -119,7 +119,7 @@ class GroupedBarPlot {
             .padding([0.2])
         svg.append("g")
             .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x).tickSize(0));
+            .call(d3.axisBottom(x).ticks(data.length).tickSize(8));
 
         // text label for the x axis
         svg.append("text")
