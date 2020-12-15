@@ -1,3 +1,4 @@
+// Graph Layout from d3-graph-gallery.com
 class LinePlot {
     constructor(div_id) {
         // set the dimensions and margins of the graph
