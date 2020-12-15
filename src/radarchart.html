@@ -143,7 +143,6 @@
     <div class="copyright">
       <p>
         Visualização de Informação - MEI &copy;
-        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
         <script>document.write(new Date().getFullYear());</script>
       </p>
     </div>
@@ -191,8 +190,8 @@
     var radarChart = new RadarChart('#radar_chart');
     var plotRadarChart = new Plot('#sliderRadar', '#labelRadar');
     var plotEvolucao = new Plot('div#slider-range', 'p#value-range');
-    data.plot_preferencias_opcoes('./files_list.csv', data, radarChart, radarChartOptions, plotRadarChart);
-    data.plot_evolucao('./files_list.csv', data, "viewAnimation", plotEvolucao, radarChart, radarChartOptions);
+    data.plot_preferencias_opcoes('./files_list.csv', radarChart, radarChartOptions, plotRadarChart);
+    data.plot_evolucao('./files_list.csv', "viewAnimation", plotEvolucao, radarChart, radarChartOptions);
 
   </script>
 

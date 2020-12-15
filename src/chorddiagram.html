@@ -155,7 +155,6 @@
     <div class="copyright">
       <p>
         Visualização de Informação - MEI &copy;
-        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
         <script>document.write(new Date().getFullYear());</script>
       </p>
     </div>
@@ -193,7 +192,7 @@
 
     var cordDiagram = new CordDiagram('#cord_diagram');
     var plotChordDiagram = new Plot('#sliderChord', '#labelChord', '#option');
-    data.plot_alternativas_candidatos('./files_list.csv', data, cordDiagram, colors, plotChordDiagram);
+    data.plot_alternativas_candidatos('./files_list.csv', cordDiagram, colors, plotChordDiagram);
   </script>
 
 </body>

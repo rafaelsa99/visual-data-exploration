@@ -125,7 +125,6 @@
     <div class="copyright">
       <p>
         Visualização de Informação - MEI &copy;
-        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
         <script>document.write(new Date().getFullYear());</script>
       </p>
     </div>
@@ -161,7 +160,7 @@
 
     var plotLine = new Plot('div#slider-range', 'p#value-range');
     var lineplotNotas = new LinePlot('#lineplotNotas');
-    data.plot_notas_ultimos_colocados('./files_list.csv', data, lineplotNotas, plotLine);
+    data.plot_notas_ultimos_colocados('./files_list.csv', lineplotNotas, plotLine);
 
   </script>
 
