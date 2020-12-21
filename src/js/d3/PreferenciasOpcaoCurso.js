@@ -5,6 +5,7 @@ class PreferenciasOpcaoCurso{
         let listCourses = new Map()
         let count = 1;
         let totalFiles = 0;
+        let max = 0;
 
         const append_data = (obj, options, pos) => {
             var i = optionsCourse.size
@@ -12,10 +13,14 @@ class PreferenciasOpcaoCurso{
             course.set("course",obj.course)
             optionsCourse.set(i, course);
             for (const [key, value] of options.entries()) {
+                if(value > max){
+                    max = value;
+                }
                 optionsCourse.get(i).set(key, value);
             }
             if (pos == totalFiles) {
                 plot.cleanPlotWithoutSmoothness();
+                plotOptions.maxValue = max;
                 plot.create_plot(get_JSON_Format(optionsCourse).filter(val => val.name == courseChoose), plotOptions)
             }  
         }
